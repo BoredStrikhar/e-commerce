@@ -1,8 +1,9 @@
+import React from 'react';
 import Text from 'components/Text';
 import styles from './MainPage.module.scss';
-import Search from './components/Search';
 import Filter from './components/Filter';
 import ProductGrid from './components/ProductGrid';
+import Search from './components/Search';
 
 const MainPage = () => {
   return (

@@ -1,18 +1,16 @@
-import PaginationBackIcon from 'components/icons/PaginationBackIcon';
-import Text from 'components/Text';
-import styles from './SingleProductPage.module.scss';
-import { Link, useParams } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
-import { Product } from '../MainPage/components/ProductGrid';
 import axios from 'axios';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Button from 'components/Button';
 import ProductCard from 'components/ProductCard';
-import { ProductResponse } from '../MainPage/components/ProductGrid';
+import Text from 'components/Text';
+import PaginationBackIcon from 'components/icons/PaginationBackIcon';
+import { Product, ProductResponse } from '../MainPage/components/ProductGrid';
+import styles from './SingleProductPage.module.scss';
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
-  const [productCategoryId, setProductCategoryId] = useState<number | null>(null);
 
   const { id } = useParams();
 
@@ -20,8 +18,6 @@ const SingleProductPage = () => {
     async (id: string) => {
       try {
         const response = await axios.get<ProductResponse>(`https://api.escuelajs.co/api/v1/products/${id}`);
-        console.log(response.data);
-        setProductCategoryId(response.data.category.id);
         const newProduct = {
           id: response.data.id,
           title: response.data.title,
@@ -29,26 +25,16 @@ const SingleProductPage = () => {
           description: response.data.description,
           categoryName: response.data.category.name,
           categoryId: response.data.category.id,
-          image: response.data.images[0].replace(/\[\"/, '').replace(/\"\]/, ''),
+          image: response.data.images[0].replace(/\["/, '').replace(/"\]/, ''),
         };
         setProduct(newProduct);
         return newProduct;
       } catch (error) {
-        console.error(error);
+        //
       }
     },
-    [setProduct, setProductCategoryId],
+    [setProduct],
   );
-
-  useEffect(() => {
-    if (id) {
-      getProduct(id).then((product) => {
-        if (product?.categoryId) {
-          getRelatedProducts(product.categoryId);
-        }
-      });
-    }
-  }, [id]);
 
   const getRelatedProducts = useCallback(
     async (productCategoryId: number) => {
@@ -64,15 +50,25 @@ const SingleProductPage = () => {
             description: item.description,
             categoryName: item.category.name,
             categoryId: item.category.id,
-            image: item.images[0].replace(/\[\"/, '').replace(/\"\]/, ''),
+            image: item.images[0].replace(/\["/, '').replace(/"\]/, ''),
           })),
         );
       } catch (error) {
-        console.error(error);
+        //
       }
     },
-    [setRelatedProducts, productCategoryId],
+    [setRelatedProducts],
   );
+
+  useEffect(() => {
+    if (id) {
+      getProduct(id).then((product) => {
+        if (product?.categoryId) {
+          getRelatedProducts(product.categoryId);
+        }
+      });
+    }
+  }, [id, getProduct, getRelatedProducts]);
 
   return (
     <>

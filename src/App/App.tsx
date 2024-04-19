@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from 'components/Header';
 import MainPage from './pages/MainPage';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import SingleProductPage from './pages/SingleProductPage';
 
 const App = () => {

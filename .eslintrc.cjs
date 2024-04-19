@@ -1,4 +1,5 @@
-import path from 'path';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path');
 
 module.exports = {
   root: true,
@@ -29,6 +30,9 @@ module.exports = {
   plugins: ['@typescript-eslint', 'import', 'prettier', 'react', 'react-hooks'],
   rules: {
     'no-console': 'warn',
+    'import/no-named-as-default': 'off',
+    'import/default': 'off',
+    'react/prop-types': 'off',
     'import/order': [
       'error',
       {
@@ -38,7 +42,7 @@ module.exports = {
         },
         pathGroups: [
           {
-            pattern: './**/*.scss',
+            pattern: '*.scss',
             group: 'sibling',
             position: 'after',
           },

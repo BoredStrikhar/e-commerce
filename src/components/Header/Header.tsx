@@ -1,10 +1,10 @@
 import * as React from 'react';
-import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
 import LogoIcon from 'components/icons/LogoIcon';
 import LogoTextIcon from 'components/icons/LogoTextIcon';
-import ShoppingCartIcon from 'components/icons/ShoppingCartIcon';
 import ProfileIcon from 'components/icons/ProfileIcon';
-import { Link } from 'react-router-dom';
+import ShoppingCartIcon from 'components/icons/ShoppingCartIcon';
+import styles from './Header.module.scss';
 
 const Header = () => {
   return (

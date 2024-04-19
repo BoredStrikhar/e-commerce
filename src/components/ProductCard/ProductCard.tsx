@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './ProductCard.module.scss';
-import Text from '../Text/Text';
 import { Link } from 'react-router-dom';
 import { Product } from 'App/pages/MainPage/components/ProductGrid';
+import Text from '../Text/Text';
+import styles from './ProductCard.module.scss';
 
 export type CardProps = {
   /** Дополнительный classname */

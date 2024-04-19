@@ -1,7 +1,6 @@
-import MultiDropdown from 'components/MultiDropdown';
-import { Option } from 'components/MultiDropdown';
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import MultiDropdown, { Option } from 'components/MultiDropdown';
 
 type Category = {
   id: number;
@@ -15,21 +14,14 @@ const Filter = () => {
       const response = await axios.get('https://api.escuelajs.co/api/v1/categories');
       const categoriesData: Category[] = response.data;
       setCategories(categoriesData.map((item) => ({ key: item.id, value: item.name })));
-    } catch (error: any) {
-      throw new Error(error.message);
+    } catch (error) {
+      /** */
     }
   }, [setCategories]);
   useEffect(() => {
     getCategories();
-  }, []);
-  return (
-    <MultiDropdown
-      options={categories}
-      value={currentValues}
-      onChange={(currentValues) => {}}
-      getTitle={(currentValues) => 'Filter'}
-    />
-  );
+  }, [getCategories]);
+  return <MultiDropdown options={categories} value={currentValues} onChange={() => {}} getTitle={() => 'Filter'} />;
 };
 
 export default Filter;

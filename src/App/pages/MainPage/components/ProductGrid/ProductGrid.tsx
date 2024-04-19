@@ -1,12 +1,12 @@
 import axios from 'axios';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import ProductCard from 'components/ProductCard';
 import Text from 'components/Text';
-import { useCallback, useEffect, useState } from 'react';
-import styles from './ProductGrid.module.scss';
-import { Link } from 'react-router-dom';
 import PaginationBackIcon from 'components/icons/PaginationBackIcon';
 import PaginationNextIcon from 'components/icons/PaginationNextIcon';
+import styles from './ProductGrid.module.scss';
 
 export type Product = {
   id: number;
@@ -49,17 +49,17 @@ const ProductGrid = () => {
           description: item.description,
           categoryName: item.category.name,
           categoryId: item.category.id,
-          image: item.images[0].replace(/\[\"/, '').replace(/\"\]/, ''),
+          image: item.images[0].replace(/\["/, '').replace(/"\]/, ''),
         })),
       );
     } catch (error) {
-      console.error(error);
+      //
     }
   }, [setProducts, setProductsQuantity]);
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return (
     <div className={styles.product_grid_container}>

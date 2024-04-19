@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './MultiDropdown.module.scss';
 import Input from 'components/Input';
 import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
+import styles from './MultiDropdown.module.scss';
 
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -36,7 +36,6 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
       return;
     }
     setCurrentInput(inputValue);
-    console.log(inputValue);
 
     const newFilteredOptions = options.filter((option) =>
       option.value.toLowerCase().startsWith(inputValue.toLowerCase()),
@@ -53,10 +52,10 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
     onChange([...value, option]);
   };
 
-  const handleRemoveOption = (option: Option) => {
-    const newValue = value.filter((val) => val.key !== option.key);
-    onChange(newValue);
-  };
+  // const handleRemoveOption = (option: Option) => {
+  //   const newValue = value.filter((val) => val.key !== option.key);
+  //   onChange(newValue);
+  // };
 
   const handleClickOutside = (e: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
