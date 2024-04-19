@@ -64,7 +64,7 @@ const SingleProductPage = () => {
             description: item.description,
             categoryName: item.category.name,
             categoryId: item.category.id,
-            image: item.images[0],
+            image: item.images[0].replace(/\[\"/, '').replace(/\"\]/, ''),
           })),
         );
       } catch (error) {
