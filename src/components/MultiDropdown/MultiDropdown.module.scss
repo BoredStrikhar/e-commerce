@@ -1,0 +1,16 @@
+.multi_dropdown_container {
+  width: 300px;
+}
+
+.multi_dropdown_options {
+  margin-top: 8px;
+  width: 100%;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+  background: var(--button-primary-text);
+}
+
+.multi_dropdown_option_text {
+  padding: 14px 12px;
+  height: 48px;
+  font-family: var(--font-family);
+}

@@ -1,0 +1,37 @@
+.main_page_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.main_page_inner_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    width: 100%;
+    max-width: 1240px;
+}
+
+.main_page_title_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 653px;
+}
+
+.main_page_subtitle {
+    text-align: center;
+    padding-top: 24px;
+}
+
+.filter_container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 24px;
+}

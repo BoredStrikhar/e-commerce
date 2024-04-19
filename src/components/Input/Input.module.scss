@@ -1,0 +1,32 @@
+.input_container {
+    border: 1px solid var(--button-primary-text);
+    padding: 16px 12px;
+    width: 100%;
+    height: 52px;
+    background: var(--button-primary-text);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    &:focus-within {
+        border: 1px solid var(--loader-bg);
+    }
+}
+
+.input_inner {
+    outline: none;
+    width: 100%;
+    top: 0;
+    border: none;
+    margin-right: 8px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--text-secondary);
+    &:disabled {
+        background: var(--button-primary-text);
+    }
+    &::placeholder {
+        color: var(--text-secondary);
+    }
+}
