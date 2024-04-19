@@ -1,10 +1,10 @@
 import "./App.css";
-import SomePage from "./pages/SomePage";
+import MainPage from "./pages/MainPage";
 
 const App = () => {
   return (
     <div className="app">
-      <SomePage></SomePage>
+      <MainPage></MainPage>
     </div>
   );
 };
