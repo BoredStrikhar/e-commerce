@@ -1,63 +1,55 @@
-.header_container {
-    width: 100%;
-    background: var(--button-primary-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 2px solid #f3f3f3;
-    height: 90px;
-    position: sticky;
-    top: 0;
+@import "styles/variables";
+@import "styles/mixins";
+.header-container {
+  @include container;
+  width: 100%;
+  background: $color-white;
+  border-bottom: 2px solid $color-white-smoke;
+  height: 90px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
-.header_inner_container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1240px;
+.header-inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1240px;
 }
 
-.header_logo_container {
-    display: flex;
-    align-items: center;
+.header-logo-container {
+  @include container;
 }
 
-.header_logo_text_icon {
-    margin-left: 12px;
+.header-logo-text-icon {
+  margin-left: 12px;
 }
 
-.header_menu_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.header-menu-container {
+  @include container;
 }
 
-.header_menu_page {
-    margin-left: 48px;
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 122%;
-    color: var(--text-primary);
-    text-decoration: none;
-    padding-top: 35px;
-    padding-bottom: 35px;
-    &:first-child {
-        margin-left: 0px;
-    }
-    &.current {
-        font-weight: 600;
-        color: var(--loader-bg);
-        border-bottom: 3px solid var(--loader-bg);
-    }
+.header-menu-page {
+  margin-left: 48px;
+  text-decoration: none;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  &:first-child {
+    margin-left: 0px;
+  }
+  &.current.current {
+    font-weight: 600;
+    color: $color-text-accent;
+    border-bottom: 3px solid $color-text-accent;
+  }
 }
 
-.header_icons_container {
-    display: flex;
-    align-items: center;
+.header-icons-container {
+  @include container;
 }
 
-.header_profile_icon {
-    margin-left: 24px;
+.header-profile-icon {
+  margin-left: 24px;
 }

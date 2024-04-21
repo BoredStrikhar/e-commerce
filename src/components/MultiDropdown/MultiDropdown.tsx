@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import Input from 'components/Input';
 import Text from 'components/Text';
@@ -52,11 +53,6 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
     onChange([...value, option]);
   };
 
-  // const handleRemoveOption = (option: Option) => {
-  //   const newValue = value.filter((val) => val.key !== option.key);
-  //   onChange(newValue);
-  // };
-
   const handleClickOutside = (e: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
       setIsOpen(false);
@@ -73,22 +69,22 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
   }, [options, setFilteredOptions]);
 
   return (
-    <div className={`${styles.multi_dropdown_container} ${className}`} ref={dropdownRef}>
-      <Input
-        type="text"
-        value={value.length ? getTitle(value) : currentInput}
-        onClick={() => !disabled && setIsOpen(true)}
-        onChange={handleInputChange}
-        placeholder={getTitle(value)}
-        disabled={disabled}
-        afterSlot={<ArrowDownIcon color="secondary"></ArrowDownIcon>}
-      />
-
+    <div className={classNames(styles['multi-dropdown-container'], className)} ref={dropdownRef}>
+      <form onClick={() => !disabled && setIsOpen(true)}>
+        <Input
+          type="text"
+          value={value.length ? getTitle(value) : currentInput}
+          onChange={handleInputChange}
+          placeholder={getTitle(value)}
+          disabled={disabled}
+          afterSlot={<ArrowDownIcon color="secondary"></ArrowDownIcon>}
+        />
+      </form>
       {isOpen && !disabled && (
-        <div className={styles.multi_dropdown_options}>
+        <div className={styles['multi-dropdown-options']}>
           {filteredOptions.map((option) => (
             <Text
-              className={styles.multi_dropdown_option_text}
+              className={styles['multi-dropdown-option-text']}
               key={option.key}
               onClick={() => handleOptionClick(option)}
             >

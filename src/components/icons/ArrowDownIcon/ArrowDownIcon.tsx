@@ -1,20 +1,9 @@
 import * as React from 'react';
 import Icon, { IconProps } from '../Icon';
+import styles from './ArrowDownIcon.module.scss';
 
-const ArrowDownIcon: React.FC<IconProps> = ({
-  className,
-  color = 'inherit',
-  width = '24px',
-  height = '24px',
-}) => {
-  const fillColor =
-    color === 'primary'
-      ? '#000'
-      : color === 'secondary'
-      ? '#afadb5'
-      : color === 'accent'
-      ? '#518581'
-      : 'inherit';
+const ArrowDownIcon: React.FC<IconProps> = ({ className, color = 'inherit', width = '24px', height = '24px' }) => {
+  
   return (
     <Icon
       className={className}
@@ -28,7 +17,7 @@ const ArrowDownIcon: React.FC<IconProps> = ({
         fillRule="evenodd"
         clipRule="evenodd"
         d="M2.33563 8.74741L3.66436 7.25259L12 14.662L20.3356 7.25259L21.6644 8.74741L12 17.338L2.33563 8.74741Z"
-        fill={fillColor}
+        className={styles[color]}
       />
     </Icon>
   );

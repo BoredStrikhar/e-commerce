@@ -1,3 +1,4 @@
+@import "styles/variables";
 .button {
   display: flex;
   justify-content: space-evenly;
@@ -5,27 +6,27 @@
   width: auto;
   height: 52px;
   border: none;
-  background: var(--loader-bg);
+  background: $color-button-primary-bg;
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
-  color: var(--button-primary-text);
+  color: $color-button-primary-text;
   padding: 16px 32px;
   white-space: nowrap;
   &:hover {
-    background: var(--button-primary-bg-hover);
+    background: $color-button-primary-bg-hover;
   }
   &:active {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    background: var(--button-primary-bg-active);
+    background: $color-button-primary-bg-active;
   }
   &:disabled {
     pointer-events: none;
-    background: var(--button-primary-bg-disabled);
+    background: $color-button-primary-bg-disabled;
   }
 }
 
-.button_text {
+.button-text {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
@@ -33,11 +34,11 @@
   color: var(--button-primary-text);
 }
 
-.button_text_margin {
+.button-text-margin {
   margin-left: 10px;
 }
 
-.button_loading.button_loading {
-  background: var(--loader-bg);
+.button-loading.button-loading {
+  background: $color-button-primary-bg-hover;
   pointer-events: none;
 }

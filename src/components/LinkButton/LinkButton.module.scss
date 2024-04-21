@@ -1,0 +1,28 @@
+@import "styles/variables";
+.link-button {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: auto;
+  height: 52px;
+  border: none;
+  padding: 16px 32px;
+  white-space: nowrap;
+  text-decoration: none;
+  &.accent {
+    background: $color-button-primary-bg;
+  }
+  &.primary {
+    background: transparent;
+  }
+  &:hover {
+    background: $color-button-primary-bg-hover;
+  }
+  &:active {
+    background: $color-button-primary-bg-active;
+  }
+  &:disabled {
+    pointer-events: none;
+    background: $color-button-primary-bg-disabled;
+  }
+}

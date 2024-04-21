@@ -1,81 +1,66 @@
-.single_product_page_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@import "styles/variables";
+@import "styles/mixins";
+.single-product-page-container {
+    @include container;
     width: 100%;
     padding-bottom: 40px;
 }
 
-.single_product_page_inner_container {
-    display: flex;
+.single-product-page-inner-container {
+    @include container;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin-top: 100px;
     width: 100%;
     max-width: 1240px;
 }
 
-.back_container {
+.back-container {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.back_link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-}
-
-.back_title {
-    color: var(--text-primary);
-    margin-left: 12px;
-}
-
-.product_container {
+.product-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding-top: 32px;
 }
 
-.product_info_container {
+.product-info-container {
     padding-left: 48px;
 }
 
-.product_image {
-    width: 600px;
-    height: 600px;
+.product-image {
+    @include square(600px);
 }
 
-.product_description {
+.product-description {
     padding-top: 24px;
 }
 
-.product_price {
+.product-price {
     padding-top: 32px;
 }
 
-.product_price_container {
+.product-price-container {
     height: 180px;
     padding-top: 48px;
 }
 
-.product_buttons_container {
+.product-buttons-container {
     padding-top: 48px;
     display: flex;
 }
 
-.add_to_cart_button {
-    border: 1px solid var(--text-secondary);
+.add-to-cart-button {
+    border: 1px solid $color-text-secondary;
     background: none;
     margin-left: 48px;
 }
 
-.related_items {
+.related-items {
     font-size: 32px;
     display: flex;
     justify-content: start;
@@ -83,11 +68,11 @@
     padding-top: 48px;
 }
 
-.related_items_title {
+.related-items-title {
     font-size: 32px;
 }
 
-.product_grid {
+.product-grid {
     display: grid;
     grid-template-columns: repeat(3, 360px);
     grid-column-gap: 79px;

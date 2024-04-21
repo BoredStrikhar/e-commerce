@@ -1,35 +1,30 @@
-.main_page_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@import "styles/mixins";
+.main-page-container {
+    @include container;
     width: 100%;
     padding-bottom: 40px;
 }
 
-.main_page_inner_container {
-    display: flex;
+.main-page-inner-container {
+    @include container;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin-top: 100px;
     width: 100%;
     max-width: 1240px;
 }
 
-.main_page_title_container {
-    display: flex;
+.main-page-title-container {
+    @include container;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     max-width: 653px;
 }
 
-.main_page_subtitle {
+.main-page-subtitle {
     text-align: center;
     padding-top: 24px;
 }
 
-.filter_container {
+.filter-container {
     width: 100%;
     display: flex;
     justify-content: flex-start;

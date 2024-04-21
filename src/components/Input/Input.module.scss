@@ -1,32 +1,34 @@
-.input_container {
-    border: 1px solid var(--button-primary-text);
-    padding: 16px 12px;
+@import "styles/variables";
+.input-container {
+    border: 1px solid $color-input-bg;
     width: 100%;
     height: 52px;
-    background: var(--button-primary-text);
+    background: $color-input-bg;
     display: flex;
     justify-content: space-around;
     align-items: center;
     &:focus-within {
-        border: 1px solid var(--loader-bg);
+        border: 1px solid $color-input-border-focus;
     }
+    padding-left: 14px;
+    padding-right: 14px;
 }
 
-.input_inner {
+.input-inner {
     outline: none;
     width: 100%;
+    height: 100%;
     top: 0;
     border: none;
     margin-right: 8px;
-    font-family: var(--font-family);
     font-weight: 400;
     font-size: 16px;
     line-height: 125%;
-    color: var(--text-secondary);
+    color: $color-text-secondary;
     &:disabled {
-        background: var(--button-primary-text);
+        background: $color-button-primary-text;
     }
     &::placeholder {
-        color: var(--text-secondary);
+        color: $color-text-secondary;
     }
 }

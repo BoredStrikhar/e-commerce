@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import * as React from 'react';
 import styles from './Text.module.scss';
 
@@ -7,7 +8,7 @@ export type TextProps = {
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span';
   weight?: 'normal' | 'medium' | 'bold';
   children: React.ReactNode;
-  color?: 'primary' | 'secondary' | 'accent';
+  color?: 'primary' | 'secondary' | 'accent' | 'white';
   maxLines?: number;
   onClick?: () => void;
   datatestid?: string;
@@ -24,9 +25,9 @@ const Text: React.FC<TextProps> = ({
   onClick,
 }) => {
   const Tag = tag;
-  const textView = styles[`text_${view}`];
-  const textColor = styles[`text_${color}`];
-  const textWeight = styles[`text_${weight}`];
+  const textView = styles[`text-${view}`];
+  const textColor = styles[`text-${color}`];
+  const textWeight = styles[`text-${weight}`];
 
   return (
     <Tag
@@ -37,7 +38,7 @@ const Text: React.FC<TextProps> = ({
         display: '-webkit-box',
         textOverflow: 'ellipsis',
       }}
-      className={`${styles.text} ${className} ${textWeight} ${textColor} ${textView}`}
+      className={classNames(styles.text, textWeight, textColor, textView, className)}
       onClick={onClick}
     >
       {children}

@@ -17,6 +17,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
   fill = 'none',
   xmlns = 'http://www.w3.org/2000/svg',
   children,
+  ...props
 }) => {
   return (
     <svg
@@ -27,6 +28,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
       viewBox={viewBox}
       fill={fill}
       xmlns={xmlns}
+      {...props}
     >
       {children}
     </svg>

@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import BackButton from 'components/BackButton';
 import Button from 'components/Button';
-import ProductCard from 'components/ProductCard';
 import Text from 'components/Text';
-import PaginationBackIcon from 'components/icons/PaginationBackIcon';
-import { Product, ProductResponse } from '../MainPage/components/ProductGrid';
+import { Product, ProductResponse } from '../MainPage/components/ProductGrid/types';
+import ProductList from '../MainPage/components/ProductList';
 import styles from './SingleProductPage.module.scss';
+import { normalizeProduct } from './utilities';
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
@@ -14,93 +15,65 @@ const SingleProductPage = () => {
 
   const { id } = useParams();
 
-  const getProduct = useCallback(
-    async (id: string) => {
+  useEffect(() => {
+    const getProduct = async (id: string) => {
       try {
         const response = await axios.get<ProductResponse>(`https://api.escuelajs.co/api/v1/products/${id}`);
-        const newProduct = {
-          id: response.data.id,
-          title: response.data.title,
-          price: response.data.price,
-          description: response.data.description,
-          categoryName: response.data.category.name,
-          categoryId: response.data.category.id,
-          image: response.data.images[0].replace(/\["/, '').replace(/"\]/, ''),
-        };
-        setProduct(newProduct);
-        return newProduct;
+        const responseArray: ProductResponse[] = [response.data];
+        setProduct(normalizeProduct(responseArray)[0]);
+        return product;
       } catch (error) {
         //
       }
-    },
-    [setProduct],
-  );
+    };
+    if (id) {
+      getProduct(id);
+    }
+  }, [id, product]);
 
-  const getRelatedProducts = useCallback(
-    async (productCategoryId: number) => {
+  useEffect(() => {
+    const getRelatedProducts = async (productCategoryId: number) => {
       try {
         const response = await axios.get<ProductResponse[]>(
           `https://api.escuelajs.co/api/v1/products/?categoryId=${productCategoryId}&offset=0&limit=3`,
         );
-        setRelatedProducts(
-          response.data.map((item) => ({
-            id: item.id,
-            title: item.title,
-            price: item.price,
-            description: item.description,
-            categoryName: item.category.name,
-            categoryId: item.category.id,
-            image: item.images[0].replace(/\["/, '').replace(/"\]/, ''),
-          })),
-        );
+        setRelatedProducts(normalizeProduct(response.data));
       } catch (error) {
         //
       }
-    },
-    [setRelatedProducts],
-  );
-
-  useEffect(() => {
-    if (id) {
-      getProduct(id).then((product) => {
-        if (product?.categoryId) {
-          getRelatedProducts(product.categoryId);
-        }
-      });
+    };
+    if (!product?.categoryId) {
+      return;
     }
-  }, [id, getProduct, getRelatedProducts]);
+    getRelatedProducts(product.categoryId);
+  }, [product?.categoryId]);
 
   return (
     <>
       {product && (
-        <div className={styles.single_product_page_container}>
-          <div className={styles.single_product_page_inner_container}>
-            <div className={styles.back_container}>
-              <Link className={styles.back_link} to="/">
-                <PaginationBackIcon fill="black" />
-                <Text className={styles.back_title} weight="normal" view="p-20">
-                  Назад
-                </Text>
-              </Link>
+        <div className={styles['single-product-page-container']}>
+          <div className={styles['single-product-page-inner-container']}>
+            <div className={styles['back-container']}>
+              <BackButton />
             </div>
-            <div className={styles.product_container}>
-              <img className={styles.product_image} src={product?.image} />
-              <div className={styles.product_info_container}>
-                <Text view="title" tag="h1" weight="bold" className={styles.product_title}>
+            <div className={styles['product-container']}>
+              <img className={styles['product-image']} src={product?.image} />
+              <div className={styles['product-info-container']}>
+                <Text view="title" tag="h1" weight="bold" className={styles['product-title']}>
                   {product?.title}
                 </Text>
-                <Text view="p-20" color="secondary" weight="normal" className={styles.product_description}>
+                <Text view="p-20" color="secondary" weight="normal" className={styles['product-description']}>
                   {product?.description}
                 </Text>
-                <div className={styles.product_price_container}>
-                  <Text view="title" weight="bold" className={styles.product_price}>
+                <div className={styles['product-price-container']}>
+                  <Text view="title" weight="bold" className={styles['product-price']}>
                     {'$' + product?.price}
                   </Text>
-                  <div className={styles.product_buttons_container}>
+                  <div className={styles['product-buttons-container']}>
                     <Button>
                       <Text view="button">Buy Now</Text>
                     </Button>
-                    <Button className={styles.add_to_cart_button}>
+                    <Button className={styles['add-to-cart-button']}>
                       <Text view="button" color="primary">
                         Add to Cart
                       </Text>
@@ -109,25 +82,12 @@ const SingleProductPage = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.related_items}>
-              <Text className={styles.related_items_title} view="title" weight="bold">
+            <div className={styles['related-items']}>
+              <Text className={styles['related-items-title']} view="title" weight="bold">
                 Related Items
               </Text>
             </div>
-            <div className={styles.product_grid}>
-              {relatedProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  image={product.image}
-                  captionSlot={product.categoryName}
-                  title={product.title}
-                  subtitle={product.description}
-                  contentSlot={'$' + product.price}
-                  actionSlot={<Button>Add to Cart</Button>}
-                  product={product}
-                />
-              ))}
-            </div>
+            <ProductList products={relatedProducts} />
           </div>
         </div>
       )}

@@ -1,0 +1,55 @@
+$color-breaker-bay: #518581;
+$color-white: #fff;
+$color-ziggurat: #86aaa7;
+$color-gainsboro: #d9d9d9;
+$color-dark-green-copper: #487773;
+$color-black: #000;
+$color-spun-pearl: #afadb5;
+$color-white-smoke: #f3f3f3;
+$color-snow: #f9f9f9;
+$color-maire: #151411;
+//
+$color-loader-bg: $color-breaker-bay;
+//
+$color-button-primary-bg: $color-breaker-bay;
+$color-button-primary-text: $color-white;
+$color-button-primary-bg-hover: $color-ziggurat;
+$color-button-primary-text-hover: $color-white;
+$color-button-primary-bg-disabled: $color-gainsboro;
+$color-button-primary-text-disabled: $color-white;
+$color-button-primary-bg-active: $color-dark-green-copper;
+$color-button-primary-text-active: $color-white;
+//
+$color-text-primary: $color-black;
+$color-text-secondary: $color-spun-pearl;
+$color-text-accent: $color-breaker-bay;
+//
+$color-input-text: $color-black;
+$color-input-bg: $color-white;
+$color-input-placeholder: $color-spun-pearl;
+$color-input-border: $color-white;
+$color-input-bg-focus: $color-white;
+$color-input-border-focus: $color-breaker-bay;
+$color-input-text-focus: $color-black;
+$color-input-bg-disabled: $color-white;
+$color-input-border-disabled: $color-white;
+$color-input-text-disabled: rgba(0, 0, 0, 0.2);
+//
+$color-checkbox-bg: $color-white;
+$color-checkbox-border: $color-white;
+$color-checkbox-bg-hover: $color-white;
+$color-checkbox-border-hover: $color-breaker-bay;
+$color-checkbox-bg-disabled: rgba(255, 255, 255, 0.5);
+$color-checkbox-border-disabled: rgba(255, 255, 255, 0);
+$color-checkbox-check: $color-breaker-bay;
+$color-checkbox-check-hover: $color-breaker-bay;
+$color-checkbox-check-disabled: rgba(0, 0, 0, 0.2);
+//
+$color-card-image-bg: $color-gainsboro;
+$color-card-bg: $color-white;
+//
+$color-dropdown-options-bg: $color-white;
+//
+$color-brand: $color-breaker-bay;
+$color-brand-active: $color-dark-green-copper;
+$color-brand-hover: $color-ziggurat;

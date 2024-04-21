@@ -7,13 +7,13 @@ import Search from './components/Search';
 
 const MainPage = () => {
   return (
-    <div className={styles.main_page_container}>
-      <div className={styles.main_page_inner_container}>
-        <div className={styles.main_page_title_container}>
-          <Text tag="div">
-            <h1>Products</h1>
+    <div className={styles['main-page-container']}>
+      <div className={styles['main-page-inner-container']}>
+        <div className={styles['main-page-title-container']}>
+          <Text tag="h1" weight="bold">
+            Products
           </Text>
-          <Text className={styles.main_page_subtitle} color="secondary">
+          <Text className={styles['main-page-subtitle']} view="p-20" color="secondary">
             <span>
               We display products based on the latest products we have, if you want to see our old products please enter
               the name of the item
@@ -21,7 +21,7 @@ const MainPage = () => {
           </Text>
         </div>
         <Search />
-        <div className={styles.filter_container}>
+        <div className={styles['filter-container']}>
           <Filter />
         </div>
         <ProductGrid />
