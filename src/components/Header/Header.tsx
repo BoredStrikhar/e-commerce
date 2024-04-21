@@ -23,26 +23,15 @@ const Header = () => {
           </div>
         </Link>
         <div className={styles['header-menu-container']}>
-          {/* <Link to="" className={classNames(styles['header-menu-page'], styles['current'])}>
-            <Text view="p-18">Products</Text>
-          </Link>
-          <Link to="" className={styles['header-menu-page']}>
-            <Text view="p-18" color="primary">
-              Categories
-            </Text>
-          </Link>
-          <Link to="" className={styles['header-menu-page']}>
-            <Text view="p-18" color="primary">
-              About us
-            </Text>
-          </Link> */}
           {headerPageUrls.map((item: { url: string; title: string }) => (
             <Link
               to={item.url}
               key={item.title}
-              className={classNames(styles['header-menu-page'], { [styles['current']]: location.pathname === item.url })}
+              className={classNames(styles['header-menu-page'], {
+                [styles['current']]: location.pathname === item.url,
+              })}
             >
-              <Text view="p-18" color='primary'>
+              <Text view="p-18" color="primary">
                 {item.title}
               </Text>
             </Link>
