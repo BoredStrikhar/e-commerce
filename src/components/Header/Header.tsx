@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import LinkIcon from 'components/LinkIcon';
@@ -7,28 +7,28 @@ import LogoIcon from 'components/icons/LogoIcon';
 import LogoTextIcon from 'components/icons/LogoTextIcon';
 import ProfileIcon from 'components/icons/ProfileIcon';
 import ShoppingCartIcon from 'components/icons/ShoppingCartIcon';
-import styles from './Header.module.scss';
+import s from './Header.module.scss';
 import { headerPageUrls } from './config';
 
 const Header = () => {
   const location = useLocation();
 
   return (
-    <div className={styles['header-container']}>
-      <div className={styles['header-inner-container']}>
+    <div className={s['header-container']}>
+      <div className={s['header']}>
         <Link to="/">
-          <div className={styles['header-logo-container']}>
+          <div className={s['header__logo']}>
             <LogoIcon />
-            <LogoTextIcon className={styles['header-logo-text-icon']} />
+            <LogoTextIcon className={s['header__text-icon']} />
           </div>
         </Link>
-        <div className={styles['header-menu-container']}>
+        <div className={s['header__menu']}>
           {headerPageUrls.map((item: { url: string; title: string }) => (
             <Link
               to={item.url}
               key={item.title}
-              className={classNames(styles['header-menu-page'], {
-                [styles['current']]: location.pathname === item.url,
+              className={cn(s['header__page'], {
+                [s['current']]: location.pathname === item.url,
               })}
             >
               <Text view="p-18" color="primary">
@@ -37,12 +37,12 @@ const Header = () => {
             </Link>
           ))}
         </div>
-        <div className={styles['header-icons-container']}>
+        <div className={s['header__icons']}>
           <LinkIcon to="/">
             <ShoppingCartIcon />
           </LinkIcon>
           <LinkIcon to="/">
-            <ProfileIcon className={styles['header-profile-icon']} />
+            <ProfileIcon className={s['header__profile-icon']} />
           </LinkIcon>
         </div>
       </div>

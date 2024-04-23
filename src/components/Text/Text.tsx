@@ -1,6 +1,6 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
-import styles from './Text.module.scss';
+import s from './Text.module.scss';
 
 export type TextProps = {
   className?: string;
@@ -25,9 +25,6 @@ const Text: React.FC<TextProps> = ({
   onClick,
 }) => {
   const Tag = tag;
-  const textView = styles[`text-${view}`];
-  const textColor = styles[`text-${color}`];
-  const textWeight = styles[`text-${weight}`];
 
   return (
     <Tag
@@ -38,7 +35,7 @@ const Text: React.FC<TextProps> = ({
         display: '-webkit-box',
         textOverflow: 'ellipsis',
       }}
-      className={classNames(styles.text, textWeight, textColor, textView, className)}
+      className={cn(s['text'], s[`text_weight_${weight}`], s[`text_color_${color}`], s[`text_view_${view}`], className)}
       onClick={onClick}
     >
       {children}

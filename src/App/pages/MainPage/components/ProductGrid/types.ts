@@ -5,7 +5,7 @@ export type Product = {
   description: string;
   categoryName: string;
   categoryId: number;
-  image: string;
+  image: string[];
 };
 
 export type ProductResponse = {

@@ -1,10 +1,9 @@
 @import "styles/mixins";
-.search-container {
-    @include container;
-    width: 100%;
-    padding-top: 48px;
-}
-
-.search-button {
+.search {
+  @include container;
+  width: 100%;
+  padding-top: 48px;
+  &__button {
     margin-left: 24px;
+  }
 }

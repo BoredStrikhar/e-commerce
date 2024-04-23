@@ -7,6 +7,7 @@ export type IconProps = React.SVGAttributes<SVGElement> & {
   viewBox?: string;
   fill?: string;
   xmlns?: string;
+  strokeWidth?: number;
 };
 
 const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
@@ -17,6 +18,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
   fill = 'none',
   xmlns = 'http://www.w3.org/2000/svg',
   children,
+  strokeWidth,
   ...props
 }) => {
   return (
@@ -28,6 +30,7 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
       viewBox={viewBox}
       fill={fill}
       xmlns={xmlns}
+      strokeWidth={strokeWidth}
       {...props}
     >
       {children}

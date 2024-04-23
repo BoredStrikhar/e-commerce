@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import Button from 'components/Button';
 import Input from 'components/Input';
-import styles from './Search.module.scss';
+import s from './Search.module.scss';
 
 const Search = () => {
   const [currentInput, setCurrentInput] = useState('');
@@ -9,9 +9,9 @@ const Search = () => {
     setCurrentInput(e);
   }, []);
   return (
-    <form className={styles['search-container']}>
+    <form className={s['search']}>
       <Input placeholder="Search product" value={currentInput} onChange={(e) => handleChange(e)}></Input>
-      <Button className={styles['search-button']} onClick={() => {}}>
+      <Button className={s['search__button']} onClick={() => {}}>
         Find now
       </Button>
     </form>

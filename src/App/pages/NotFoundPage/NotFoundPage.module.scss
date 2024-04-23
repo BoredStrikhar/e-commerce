@@ -3,8 +3,7 @@
   @include container;
   flex-direction: column;
   padding-top: 100px;
-}
-
-.link {
-  margin-top: 30px;
+  &__link {
+    margin-top: 30px;
+  }
 }

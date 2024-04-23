@@ -1,9 +1,9 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import Input from 'components/Input';
 import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
-import styles from './MultiDropdown.module.scss';
+import s from './MultiDropdown.module.scss';
 
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -69,7 +69,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
   }, [options, setFilteredOptions]);
 
   return (
-    <div className={classNames(styles['multi-dropdown-container'], className)} ref={dropdownRef}>
+    <div className={cn(s['multi-dropdown'], className)} ref={dropdownRef}>
       <form onClick={() => !disabled && setIsOpen(true)}>
         <Input
           type="text"
@@ -81,10 +81,10 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
         />
       </form>
       {isOpen && !disabled && (
-        <div className={styles['multi-dropdown-options']}>
+        <div className={s['multi-dropdown__options']}>
           {filteredOptions.map((option) => (
             <Text
-              className={styles['multi-dropdown-option-text']}
+              className={s['multi-dropdown__option-text']}
               key={option.key}
               onClick={() => handleOptionClick(option)}
             >

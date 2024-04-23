@@ -1,21 +1,17 @@
-@import "styles/variables";
 @import "styles/mixins";
-.product-grid-container {
-    width: 100%;
-}
-
-.product-grid-title {
+.product-grid {
+  width: 100%;
+  &__title-container {
     display: flex;
     align-items: center;
     padding-top: 48px;
-}
-
-.product-quantity {
+  }
+  &__quantity {
     margin-left: 24px;
-}
-
-.total-product {
+  }
+  &__title {
     font-size: 32px;
     line-height: 150%;
     color: $color-text-primary;
+  }
 }

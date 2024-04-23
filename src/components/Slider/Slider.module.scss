@@ -1,0 +1,8 @@
+@import "styles/mixins";
+.slider {
+    min-width: 600px;
+}
+
+.slider__product-image {
+    @include square(600px);
+}

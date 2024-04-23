@@ -1,32 +1,29 @@
 @import "styles/mixins";
 .main-page-container {
-    @include container;
-    width: 100%;
-    padding-bottom: 40px;
+  @include container;
+  width: 100%;
+  padding-bottom: 40px;
 }
 
-.main-page-inner-container {
-    @include container;
-    flex-direction: column;
-    margin-top: 100px;
-    width: 100%;
-    max-width: 1240px;
-}
-
-.main-page-title-container {
+.main-page {
+  @include container;
+  flex-direction: column;
+  margin-top: 100px;
+  width: 100%;
+  max-width: 1240px;
+  &__title-container {
     @include container;
     flex-direction: column;
     max-width: 653px;
-}
-
-.main-page-subtitle {
+  }
+  &__subtitle {
     text-align: center;
     padding-top: 24px;
-}
-
-.filter-container {
+  }
+  &__filter-container {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     padding-top: 24px;
+  }
 }

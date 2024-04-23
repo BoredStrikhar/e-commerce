@@ -1,4 +1,4 @@
-@import "styles/variables";
+@import "styles/mixins";
 .button {
   display: flex;
   justify-content: space-evenly;
@@ -13,6 +13,9 @@
   color: $color-button-primary-text;
   padding: 16px 32px;
   white-space: nowrap;
+  &__text {
+    color: $color-button-primary-text;
+  }
   &:hover {
     background: $color-button-primary-bg-hover;
   }
@@ -24,21 +27,4 @@
     pointer-events: none;
     background: $color-button-primary-bg-disabled;
   }
-}
-
-.button-text {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 100%;
-  color: var(--button-primary-text);
-}
-
-.button-text-margin {
-  margin-left: 10px;
-}
-
-.button-loading.button-loading {
-  background: $color-button-primary-bg-hover;
-  pointer-events: none;
 }
