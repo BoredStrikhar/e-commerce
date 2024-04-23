@@ -1,0 +1,28 @@
+@import "styles/mixins";
+.slider-nav-buttons {
+  position: absolute;
+  top: 0;
+  z-index: inherit;
+  padding-top: 45%;
+  width: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__button {
+    @include square(64px);
+    @include container;
+    border-radius: 40px;
+    background-color: $color-black;
+    box-shadow: 0 4px 20px 0 rgba(175, 173, 181, 0.2);
+    &:hover {
+      background-color: $color-black;
+      opacity: 0.8;
+    }
+    &:disabled {
+      background-color: $color-black;
+      opacity: 0.6;
+    }
+  }
+}

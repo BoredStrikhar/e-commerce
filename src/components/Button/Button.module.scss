@@ -1,0 +1,30 @@
+@import "styles/mixins";
+.button {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: auto;
+  height: 52px;
+  border: none;
+  background: $color-button-primary-bg;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: $color-button-primary-text;
+  padding: 16px 32px;
+  white-space: nowrap;
+  &__text {
+    color: $color-button-primary-text;
+  }
+  &:hover {
+    background: $color-button-primary-bg-hover;
+  }
+  &:active {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background: $color-button-primary-bg-active;
+  }
+  &:disabled {
+    pointer-events: none;
+    background: $color-button-primary-bg-disabled;
+  }
+}

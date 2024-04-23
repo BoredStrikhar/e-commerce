@@ -1,0 +1,79 @@
+@import "styles/mixins";
+.text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.text_view_button {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: $color-text-primary;
+}
+
+.text_view_title {
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 109%;
+  color: $color-text-primary;
+}
+
+.text_view_p-20 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  color: $color-text-primary;
+}
+
+.text_view_p-18 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  color: $color-text-primary;
+}
+
+.text_view_p-16 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: $color-text-primary;
+}
+
+.text_view_p-14 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  color: $color-text-primary;
+}
+
+.text_color_primary {
+  color: $color-text-primary;
+}
+
+.text_color_secondary {
+  color: $color-text-secondary;
+}
+
+.text_color_accent {
+  color: $color-text-accent;
+}
+
+.text_color_white {
+  color: $color-button-primary-text;
+}
+
+.text_color_inherit {
+  color: inherit;
+}
+
+.text_weight_normal {
+  font-weight: normal;
+}
+
+.text_weight_medium {
+  font-weight: medium;
+}
+
+.text_weight_bold {
+  font-weight: bold;
+}

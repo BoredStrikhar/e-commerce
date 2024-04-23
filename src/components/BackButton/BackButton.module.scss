@@ -1,0 +1,9 @@
+@import "styles/mixins";
+.back-link {
+  @include container;
+  text-decoration: none;
+  &__title {
+    color: $color-text-primary;
+    margin-left: 12px;
+  }
+}

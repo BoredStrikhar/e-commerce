@@ -1,0 +1,9 @@
+@import "styles/mixins";
+.not-found-page {
+  @include container;
+  flex-direction: column;
+  padding-top: 100px;
+  &__link {
+    margin-top: 30px;
+  }
+}

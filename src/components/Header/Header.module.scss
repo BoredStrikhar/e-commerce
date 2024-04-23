@@ -1,0 +1,48 @@
+@import "styles/mixins";
+.header-container {
+    @include container;
+    width: 100%;
+    background: $color-white;
+    border-bottom: 2px solid $color-white-smoke;
+    height: 90px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1240px;
+    &__logo {
+        @include container;
+    }
+    &__text-icon {
+        margin-left: 12px;
+    }
+    &__menu {
+        @include container;
+    }
+    &__page {
+        margin-left: 48px;
+        text-decoration: none;
+        padding-top: 35px;
+        padding-bottom: 35px;
+        &:first-child {
+            margin-left: 0px;
+        }
+        &.current.current {
+            font-weight: 600;
+            color: $color-text-accent;
+            border-bottom: 3px solid $color-text-accent;
+        }
+    }
+    &__icons {
+        @include container;
+    }
+    &__profile-icon {
+        margin-left: 24px;
+    }
+}
