@@ -1,20 +1,21 @@
 import * as React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Layout from 'components/Layout';
+import { useQueryParamsStoreInit } from 'store/RootStore/hooks/useQueryParamsStoreInit.ts';
 import { routeConfig } from '../routes/routes.ts';
 
 const App = () => {
+  useQueryParamsStoreInit();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          {routeConfig.map(({ path, element }) => {
-            const Tag = element;
-            return <Route key={path} path={path} element={<Tag />} />;
-          })}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route element={<Layout />}>
+        {routeConfig.map(({ path, element }) => {
+          const Tag = element;
+          return <Route key={path} path={path} element={<Tag />} />;
+        })}
+      </Route>
+    </Routes>
   );
 };
 

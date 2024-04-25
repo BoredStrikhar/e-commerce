@@ -5,24 +5,24 @@ import BackButton from 'components/BackButton';
 import Button from 'components/Button';
 import Slider from 'components/Slider';
 import Text from 'components/Text';
+import { ProductApi, ProductModel, normalizeProduct } from 'store/models/Product';
 import LoaderPage from '../LoaderPage';
-import { Product, ProductResponse } from '../MainPage/components/ProductGrid/types';
 import ProductList from '../MainPage/components/ProductList';
 import s from './ProductPage.module.scss';
-import { getUniqueProducts, normalizeProduct } from './utilities';
+import { getUniqueProducts } from './utilities';
 
 const ProductPage = () => {
-  const [product, setProduct] = useState<Product | null>(null);
-  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [product, setProduct] = useState<ProductModel | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<ProductModel[]>([]);
   const { id } = useParams();
   const relatedProductsQuantity = 3;
 
   useEffect(() => {
     if (id) {
       axios
-        .get<ProductResponse>(`https://api.escuelajs.co/api/v1/products/${id}`)
+        .get<ProductApi>(`https://api.escuelajs.co/api/v1/products/${id}`)
         .then((response) => {
-          const responseArray: ProductResponse[] = [response.data];
+          const responseArray: ProductApi[] = [response.data];
           setProduct(normalizeProduct(responseArray)[0]);
         })
         .catch((error) => {
@@ -41,7 +41,7 @@ const ProductPage = () => {
     }
 
     axios
-      .get<ProductResponse[]>(
+      .get<ProductApi[]>(
         `https://api.escuelajs.co/api/v1/products/?categoryId=${product.categoryId}&offset=0&limit=${relatedProductsQuantity + 1}`,
       )
       .then((response) => {

@@ -1,36 +1,21 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect } from 'react';
 import Text from 'components/Text';
+import { useProductsStore } from 'store/ProductsStore/hooks';
+import { Meta } from 'utils/meta';
 import LoaderPage from '../../../../pages/LoaderPage';
-import { normalizeProduct } from '../../../ProductPage/utilities';
 import Pagination from '../Pagination';
 import ProductList from '../ProductList';
 import s from './ProductGrid.module.scss';
-import { Product, ProductResponse } from './types';
 
 const ProductGrid = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [productsQuantity, setProductsQuantity] = useState<number>(0);
-
-  const productsPerPage = 9;
+  const store = useProductsStore();
 
   useEffect(() => {
-    axios
-      .get<ProductResponse[]>('https://api.escuelajs.co/api/v1/products?offset=0&limit=50')
-      .then((response) => {
-        setProductsQuantity(response.data.length);
-        setProducts(normalizeProduct(response.data.slice(0, 9)));
-      })
-      .catch((error) => {
-        if (axios.isAxiosError(error)) {
-          throw error;
-        } else {
-          throw new Error('Error while getting products');
-        }
-      });
-  }, []);
+    store.getProductsList({ offset: 0 });
+  }, [store, store.search]);
 
-  if (!products.length) {
+  if (store.meta === Meta.loading) {
     return <LoaderPage></LoaderPage>;
   }
 
@@ -41,13 +26,13 @@ const ProductGrid = () => {
           Total Product
         </Text>
         <Text className={s['product-grid__quantity']} weight="bold" view="p-20" color="accent">
-          {productsQuantity}
+          {store.list.length}
         </Text>
       </div>
-      <ProductList products={products} />
-      <Pagination productsPerPage={productsPerPage} productsQuantity={productsQuantity} />
+      <ProductList products={store.list} />
+      <Pagination productsPerPage={9} productsQuantity={store.list.length} />
     </div>
   );
 };
 
-export default ProductGrid;
+export default observer(ProductGrid);

@@ -1,12 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/Button';
 import ProductCard from 'components/ProductCard';
-import { Product } from '../ProductGrid/types';
+import { ProductModel } from 'store/models/Product';
 import s from './ProductList.module.scss';
 
 type ProductListProps = {
-  products: Product[];
+  products: ProductModel[];
 };
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
@@ -26,7 +26,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
       {products.map((product) => (
         <ProductCard
           key={product.id}
-          image={product.image[0]}
+          image={product.images[0]}
           captionSlot={product.categoryName}
           title={product.title}
           subtitle={product.description}
@@ -39,4 +39,4 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
   );
 };
 
-export default ProductList;
+export default memo(ProductList);

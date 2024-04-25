@@ -36,6 +36,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
     if (value.length) {
       return;
     }
+
     setCurrentInput(inputValue);
 
     const newFilteredOptions = options.filter((option) =>
