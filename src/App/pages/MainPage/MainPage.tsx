@@ -1,15 +1,19 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import Text from 'components/Text';
+import CategoriesStore from 'store/CategoriesStore';
+import { CategoriesStoreContext } from 'store/CategoriesStore/hooks';
 import ProductsStore from 'store/ProductsStore';
 import { ProductsStoreContext } from 'store/ProductsStore/hooks';
 import { useLocalStore } from 'utils/useLocalStore';
 import s from './MainPage.module.scss';
-import Filter from './components/Filter';
+import CategoryFilter from './components/CategoryFilter';
 import ProductGrid from './components/ProductGrid';
 import Search from './components/Search';
 
 const MainPage = () => {
   const productsStore = useLocalStore(() => new ProductsStore());
+  const categoriesStore = useLocalStore(() => new CategoriesStore());
 
   return (
     <ProductsStoreContext.Provider value={productsStore}>
@@ -25,9 +29,11 @@ const MainPage = () => {
             </Text>
           </div>
           <Search />
-          <div className={s['main-page__filter-container']}>
-            <Filter />
-          </div>
+          <CategoriesStoreContext.Provider value={categoriesStore}>
+            <div className={s['main-page__filter-container']}>
+              <CategoryFilter />
+            </div>
+          </CategoriesStoreContext.Provider>
           <ProductGrid />
         </div>
       </div>
@@ -35,4 +41,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default observer(MainPage);

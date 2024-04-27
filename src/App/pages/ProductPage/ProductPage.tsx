@@ -67,7 +67,7 @@ const ProductPage = () => {
           <BackButton />
         </div>
         <div className={s['product-page__product-container']}>
-          <Slider className={s['product-page__product-image']} images={product.image} />
+          <Slider className={s['product-page__product-image']} images={product.images} />
           <div className={s['product-page__product-info-container']}>
             <Text view="title" tag="h1" weight="bold">
               {product?.title}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSwiper } from 'swiper/react';
 import Button from 'components/Button';
 import PaginationIcon from 'components/icons/PaginationIcon';
@@ -6,19 +6,27 @@ import s from './SliderNavButtons.module.scss';
 
 const SliderNavButtons = () => {
   const swiper = useSwiper();
-  const [isEnd, setIsEnd] = useState(swiper.isEnd);
+
   const [isBeginning, setisBeginning] = useState(swiper.isBeginning);
+
+  const [isEnd, setIsEnd] = useState(swiper.isEnd);
 
   const handleSlideNext = () => {
     swiper.slideNext();
     setIsEnd(swiper.isEnd);
     setisBeginning(swiper.isBeginning);
   };
+
   const handleSlidePrev = () => {
     swiper.slidePrev();
     setIsEnd(swiper.isEnd);
     setisBeginning(swiper.isBeginning);
   };
+
+  useEffect(() => {
+    setisBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  }, [swiper.isBeginning, swiper.isEnd]);
 
   return (
     <div className={s['slider-nav-buttons']}>

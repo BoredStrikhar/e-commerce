@@ -1,10 +1,13 @@
+import { observer } from 'mobx-react-lite';
 import React, { useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Button from 'components/Button';
 import Input from 'components/Input';
+import { useProductsStore } from 'store/ProductsStore/hooks';
 import s from './Search.module.scss';
 
 const Search = () => {
+  const productsStore = useProductsStore();
   const [searchParams, setSearchParams] = useSearchParams('');
   const [currentValue, setCurrentValue] = useState(searchParams.get('search') || '');
 
@@ -14,7 +17,7 @@ const Search = () => {
 
   const handleButtonClick = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setSearchParams({ search: currentValue });
+    setSearchParams({ search: currentValue, category: productsStore.currentCategory.key.toString() });
   };
 
   return (
@@ -27,4 +30,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default observer(Search);

@@ -23,8 +23,9 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
 
   return (
     <div className={s['product-grid']}>
-      {products.map((product) => (
+      {products.map((product, index, _products) => (
         <ProductCard
+          isLast={index === Math.floor(_products.length / 9) * 9 - 10}
           key={product.id}
           image={product.images[0]}
           captionSlot={product.categoryName}

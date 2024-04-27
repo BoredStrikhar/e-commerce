@@ -1,5 +1,6 @@
 import cn from 'classnames';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Text from '../Text/Text';
 import s from './ProductCard.module.scss';
 
@@ -20,6 +21,7 @@ export type CardProps = {
   onClick?: () => void;
   /** Слот для действия */
   actionSlot?: React.ReactNode;
+  isLast?: boolean;
 };
 
 const ProductCard: React.FC<CardProps> = ({
@@ -31,9 +33,21 @@ const ProductCard: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
+  isLast,
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [searchParams,] = useSearchParams('');
+
+  useEffect(() => {
+    if (isLast && ref.current && searchParams.get('currentPage')) {
+      ref.current.scrollIntoView();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className={cn(s['product-card'], className)} onClick={onClick}>
+    <div className={cn(s['product-card'], className)} onClick={onClick} ref={ref}>
       <img className={s['product-card__image']} src={image} alt="product"></img>
       <div className={s['product-card__body']}>
         <div>

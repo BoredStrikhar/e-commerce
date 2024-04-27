@@ -1,8 +1,18 @@
 @import "styles/mixins";
 .slider {
+    @include square(600px);
+    position: relative;
     min-width: 600px;
+    &.slider {
+        margin: 0px;
+    }
 }
 
 .slider__product-image {
     @include square(600px);
+    object-fit: cover;
+}
+
+.swiper.swiper {
+    margin-left: 0px !important;
 }
