@@ -3,7 +3,7 @@ import { IReactionDisposer, action, computed, makeObservable, observable, reacti
 import { Option } from 'components/Dropdown';
 import rootStore from 'store/RootStore';
 import { ProductApi, ProductModel, normalizeProduct } from 'store/models/Product';
-import Collection, { linearizeCollection } from 'store/models/shared/collections';
+import Collection from 'store/models/shared/collections';
 import { Meta } from 'utils/meta';
 import { ILocalStore } from 'utils/useLocalStore';
 import { GetProductsListParams, IProductsStore } from './types';
@@ -56,7 +56,7 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
   }
 
   get list(): ProductModel[] {
-    return linearizeCollection(this._list);
+    return this._list.linearize();
   }
 
   get meta(): Meta {
@@ -91,8 +91,6 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
   async getProductsList(params: GetProductsListParams): Promise<void> {
     this._meta = Meta.loading;
     this._list.clear();
-    //this._list = new Collection<number, ProductModel>([], (element) => element.id);
-    //this._list = getInitialCollectionModel();
     const response = await axios<ProductApi[]>({
       method: 'get',
       url: 'https://api.escuelajs.co/api/v1/products',
@@ -114,7 +112,6 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
         }
 
         this._meta = Meta.success;
-        //this._list = normalizeCollection(normalizeProduct(response.data), (listItem) => listItem.id);
         this._list.add(normalizeProduct(response.data));
         this._offset = this._offset + 9;
         return;
@@ -145,9 +142,11 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
         this._list.add(normalizeProduct(response.data));
         this._offset = this._offset + 9;
         this._currentPage = this._currentPage + 1;
+        this._meta = Meta.success;
         return;
       } catch (e) {
-        //this._list = getInitialCollectionModel();
+        this._meta = Meta.error;
+        this._list.clear();
       }
     });
   }

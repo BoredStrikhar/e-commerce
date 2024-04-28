@@ -1,62 +1,29 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect } from 'react';
+import { matchPath, useLocation } from 'react-router-dom';
 import BackButton from 'components/BackButton';
 import Button from 'components/Button';
 import Slider from 'components/Slider';
 import Text from 'components/Text';
-import { ProductApi, ProductModel, normalizeProduct } from 'store/models/Product';
+import SingleProductStore from 'store/SingleProductStore';
+import { useLocalStore } from 'utils/useLocalStore';
 import LoaderPage from '../LoaderPage';
 import ProductList from '../MainPage/components/ProductList';
 import s from './ProductPage.module.scss';
-import { getUniqueProducts } from './utilities';
 
 const ProductPage = () => {
-  const [product, setProduct] = useState<ProductModel | null>(null);
-  const [relatedProducts, setRelatedProducts] = useState<ProductModel[]>([]);
-  const { id } = useParams();
-  const relatedProductsQuantity = 3;
+  const singleProductStore = useLocalStore(() => new SingleProductStore());
+
+  const location = useLocation();
 
   useEffect(() => {
-    if (id) {
-      axios
-        .get<ProductApi>(`https://api.escuelajs.co/api/v1/products/${id}`)
-        .then((response) => {
-          const responseArray: ProductApi[] = [response.data];
-          setProduct(normalizeProduct(responseArray)[0]);
-        })
-        .catch((error) => {
-          if (axios.isAxiosError(error)) {
-            throw error;
-          } else {
-            throw new Error('Error while getting product');
-          }
-        });
-    }
-  }, [id]);
+    singleProductStore.id = Number(matchPath('/product/:id', location.pathname)?.params.id);
+    singleProductStore.getProduct().then(() => {
+      singleProductStore.getRelatedProducts();
+    });
+  }, [location.pathname, singleProductStore]);
 
-  useEffect(() => {
-    if (!product?.categoryId || !id) {
-      return;
-    }
-
-    axios
-      .get<ProductApi[]>(
-        `https://api.escuelajs.co/api/v1/products/?categoryId=${product.categoryId}&offset=0&limit=${relatedProductsQuantity + 1}`,
-      )
-      .then((response) => {
-        setRelatedProducts(normalizeProduct(getUniqueProducts(response.data, id, relatedProductsQuantity)));
-      })
-      .catch((error) => {
-        if (axios.isAxiosError(error)) {
-          throw error;
-        } else {
-          throw new Error('Error while getting related products');
-        }
-      });
-  }, [id, product?.categoryId]);
-
-  if (!product) {
+  if (!singleProductStore.product) {
     return <LoaderPage></LoaderPage>;
   }
 
@@ -67,17 +34,17 @@ const ProductPage = () => {
           <BackButton />
         </div>
         <div className={s['product-page__product-container']}>
-          <Slider className={s['product-page__product-image']} images={product.images} />
+          <Slider className={s['product-page__product-image']} images={singleProductStore.product.images} />
           <div className={s['product-page__product-info-container']}>
             <Text view="title" tag="h1" weight="bold">
-              {product?.title}
+              {singleProductStore.product.title}
             </Text>
             <Text view="p-20" color="secondary" weight="normal" className={s['product-page__product-description']}>
-              {product?.description}
+              {singleProductStore.product.description}
             </Text>
             <div className={s['product-page__product-price-container']}>
               <Text view="title" weight="bold" className={s['product-page__product-price']}>
-                {'$' + product?.price}
+                {'$' + singleProductStore.product.price}
               </Text>
               <div className={s['product-page__product-buttons-container']}>
                 <Button>
@@ -97,10 +64,10 @@ const ProductPage = () => {
             Related Items
           </Text>
         </div>
-        <ProductList products={relatedProducts} />
+        <ProductList products={singleProductStore.relatedProducts} />
       </div>
     </div>
   );
 };
 
-export default ProductPage;
+export default observer(ProductPage);

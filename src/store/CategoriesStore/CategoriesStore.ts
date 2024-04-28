@@ -1,19 +1,14 @@
 import axios from 'axios';
 import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 import { CategoryApi, CategoryModel, normalizeCategory } from 'store/models/Category';
-import {
-  CollectionModel,
-  getInitialCollectionModel,
-  linearizeCollection,
-  normalizeCollection,
-} from 'store/models/shared/collections';
+import Collection from 'store/models/shared/collections';
 import { Meta } from 'utils/meta';
 import { ILocalStore } from 'utils/useLocalStore';
 
 type PrivateFields = '_list' | '_meta';
 
 export default class CategoriesStore implements ILocalStore {
-  private _list: CollectionModel<number, CategoryModel> = getInitialCollectionModel();
+  private _list: Collection<number, CategoryModel> = new Collection<number, CategoryModel>([], (element) => element.id);
   private _meta: Meta = Meta.initial;
 
   constructor() {
@@ -28,7 +23,7 @@ export default class CategoriesStore implements ILocalStore {
   }
 
   get list(): CategoryModel[] {
-    return linearizeCollection(this._list);
+    return this._list.linearize();
   }
 
   get meta(): Meta {
@@ -37,7 +32,7 @@ export default class CategoriesStore implements ILocalStore {
 
   async getCategoriesList(): Promise<void> {
     this._meta = Meta.loading;
-    this._list = getInitialCollectionModel();
+    this._list.clear();
     const response = await axios<CategoryApi[]>({
       method: 'get',
       url: 'https://api.escuelajs.co/api/v1/categories',
@@ -48,11 +43,11 @@ export default class CategoriesStore implements ILocalStore {
       }
       try {
         this._meta = Meta.success;
-        this._list = normalizeCollection(normalizeCategory(response.data), (listItem) => listItem.id);
+        this._list.add(normalizeCategory(response.data));
         return;
       } catch (e) {
         this._meta = Meta.error;
-        this._list = getInitialCollectionModel();
+        this._list.clear();
       }
     });
   }
