@@ -1,12 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/Button';
 import ProductCard from 'components/ProductCard';
-import { Product } from '../ProductGrid/types';
+import { ProductModel } from 'store/models/Product';
 import s from './ProductList.module.scss';
 
 type ProductListProps = {
-  products: Product[];
+  products: ProductModel[];
 };
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
@@ -23,10 +23,11 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
 
   return (
     <div className={s['product-grid']}>
-      {products.map((product) => (
+      {products.map((product, index, _products) => (
         <ProductCard
+          isLast={index === Math.floor(_products.length / 9) * 9 - 10}
           key={product.id}
-          image={product.image[0]}
+          image={product.images[0]}
           captionSlot={product.categoryName}
           title={product.title}
           subtitle={product.description}
@@ -39,4 +40,4 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
   );
 };
 
-export default ProductList;
+export default memo(ProductList);

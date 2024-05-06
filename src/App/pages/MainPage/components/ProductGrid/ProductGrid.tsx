@@ -1,36 +1,45 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useCallback, useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useSearchParams } from 'react-router-dom';
 import Text from 'components/Text';
+import { useProductsStore } from 'store/ProductsStore/hooks';
+import { Meta } from 'utils/meta';
 import LoaderPage from '../../../../pages/LoaderPage';
-import { normalizeProduct } from '../../../ProductPage/utilities';
-import Pagination from '../Pagination';
 import ProductList from '../ProductList';
 import s from './ProductGrid.module.scss';
-import { Product, ProductResponse } from './types';
 
 const ProductGrid = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [productsQuantity, setProductsQuantity] = useState<number>(0);
+  const productsStore = useProductsStore();
 
-  const productsPerPage = 9;
+  const [, setSearchParams] = useSearchParams();
+
+  const fetchMoreData = useCallback(() => {
+    productsStore.fetchMoreProducts();
+    setSearchParams((prev) => {
+      return {
+        ...Array.from(prev.entries()).reduce(
+          (accum, [key, value]) => {
+            accum[key] = value;
+            return accum;
+          },
+          {} as Record<string, string>,
+        ),
+        currentPage: productsStore.currentPage.toString(),
+      };
+    });
+  }, [productsStore, setSearchParams]);
 
   useEffect(() => {
-    axios
-      .get<ProductResponse[]>('https://api.escuelajs.co/api/v1/products?offset=0&limit=50')
-      .then((response) => {
-        setProductsQuantity(response.data.length);
-        setProducts(normalizeProduct(response.data.slice(0, 9)));
-      })
-      .catch((error) => {
-        if (axios.isAxiosError(error)) {
-          throw error;
-        } else {
-          throw new Error('Error while getting products');
-        }
-      });
-  }, []);
+    productsStore.getProductsList({
+      title: productsStore.search,
+      categoryId: productsStore.currentCategory.key,
+      limit: (productsStore.currentPage + 1) * 9,
+      offset: 0,
+    });
+  }, [productsStore, productsStore.search, productsStore.currentCategory.key]);
 
-  if (!products.length) {
+  if (productsStore.meta === Meta.loading) {
     return <LoaderPage></LoaderPage>;
   }
 
@@ -41,13 +50,19 @@ const ProductGrid = () => {
           Total Product
         </Text>
         <Text className={s['product-grid__quantity']} weight="bold" view="p-20" color="accent">
-          {productsQuantity}
+          {productsStore.list.length}
         </Text>
       </div>
-      <ProductList products={products} />
-      <Pagination productsPerPage={productsPerPage} productsQuantity={productsQuantity} />
+      <InfiniteScroll
+        dataLength={productsStore.list.length}
+        next={fetchMoreData}
+        hasMore={productsStore.hasMore}
+        loader={<h4>Loading...</h4>}
+      >
+        <ProductList products={productsStore.list} />
+      </InfiniteScroll>
     </div>
   );
 };
 
-export default ProductGrid;
+export default observer(ProductGrid);

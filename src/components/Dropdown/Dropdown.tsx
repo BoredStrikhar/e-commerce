@@ -1,9 +1,10 @@
 import cn from 'classnames';
+import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef, useState } from 'react';
 import Input from 'components/Input';
 import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
-import s from './MultiDropdown.module.scss';
+import s from './Dropdown.module.scss';
 
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -12,28 +13,28 @@ export type Option = {
   value: string;
 };
 
-export type MultiDropdownProps = {
+export type DropdownProps = {
   className?: string;
   /** Массив возможных вариантов для выбора */
   options: Option[];
   /** Текущие выбранные значения поля, может быть пустым */
-  value: Option[];
+  value: Option;
   /** Callback, вызываемый при выборе варианта */
-  onChange: (value: Option[]) => void;
+  onChange: (value: Option) => void;
   /** Заблокирован ли дропдаун */
   disabled?: boolean;
   /** Возвращает строку которая будет выводится в инпуте. В случае если опции не выбраны, строка должна отображаться как placeholder. */
-  getTitle: (value: Option[]) => string;
+  getTitle: (value: Option) => string;
 };
 
-const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value, onChange, disabled, getTitle }) => {
+const Dropdown: React.FC<DropdownProps> = ({ className, options, value, onChange, disabled, getTitle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [currentInput, setCurrentInput] = useState('');
   const [filteredOptions, setFilteredOptions] = useState(options);
 
   const handleInputChange = (inputValue: string) => {
-    if (value.length) {
+    if (value) {
       return;
     }
 
@@ -46,12 +47,13 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
   };
 
   const handleOptionClick = (option: Option) => {
-    const optionIndex = value.findIndex((item) => item.key === option.key);
-    if (optionIndex !== -1) {
-      onChange(value.slice(0, optionIndex).concat(value.slice(optionIndex + 1)));
+    if (value.key === option.key) {
+      onChange({ key: 0, value: '' });
+      setIsOpen(false);
       return;
     }
-    onChange([...value, option]);
+    onChange(option);
+    setIsOpen(false);
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -70,11 +72,11 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
   }, [options, setFilteredOptions]);
 
   return (
-    <div className={cn(s['multi-dropdown'], className)} ref={dropdownRef}>
+    <div className={cn(s['dropdown'], className)} ref={dropdownRef}>
       <form onClick={() => !disabled && setIsOpen(true)}>
         <Input
           type="text"
-          value={value.length ? getTitle(value) : currentInput}
+          value={value ? getTitle(value) : currentInput}
           onChange={handleInputChange}
           placeholder={getTitle(value)}
           disabled={disabled}
@@ -82,13 +84,9 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
         />
       </form>
       {isOpen && !disabled && (
-        <div className={s['multi-dropdown__options']}>
+        <div className={s['dropdown__options']}>
           {filteredOptions.map((option) => (
-            <Text
-              className={s['multi-dropdown__option-text']}
-              key={option.key}
-              onClick={() => handleOptionClick(option)}
-            >
+            <Text className={s['dropdown__option-text']} key={option.key} onClick={() => handleOptionClick(option)}>
               {option.value}
             </Text>
           ))}
@@ -98,4 +96,4 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({ className, options, value
   );
 };
 
-export default MultiDropdown;
+export default observer(Dropdown);
