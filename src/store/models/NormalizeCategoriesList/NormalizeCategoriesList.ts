@@ -1,5 +1,7 @@
 import { CategoryModel } from 'store/models/Category';
 
-export const normalize = (categoriesData: CategoryModel[]) => {
+const normalizeCategoriesList = (categoriesData: CategoryModel[]) => {
   return categoriesData.map((item) => ({ key: item.id, value: item.name }));
 };
+
+export default normalizeCategoriesList;

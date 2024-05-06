@@ -34,7 +34,7 @@ const Dropdown: React.FC<DropdownProps> = ({ className, options, value, onChange
   const [filteredOptions, setFilteredOptions] = useState(options);
 
   const handleInputChange = (inputValue: string) => {
-    if (value) {
+    if (value.value) {
       return;
     }
 
@@ -49,6 +49,7 @@ const Dropdown: React.FC<DropdownProps> = ({ className, options, value, onChange
   const handleOptionClick = (option: Option) => {
     if (value.key === option.key) {
       onChange({ key: 0, value: '' });
+      setCurrentInput('');
       setIsOpen(false);
       return;
     }
@@ -76,9 +77,9 @@ const Dropdown: React.FC<DropdownProps> = ({ className, options, value, onChange
       <form onClick={() => !disabled && setIsOpen(true)}>
         <Input
           type="text"
-          value={value ? getTitle(value) : currentInput}
+          value={value.value ? getTitle(value) : currentInput}
           onChange={handleInputChange}
-          placeholder={getTitle(value)}
+          placeholder={'Categories'}
           disabled={disabled}
           afterSlot={<ArrowDownIcon color="secondary"></ArrowDownIcon>}
         />

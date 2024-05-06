@@ -37,10 +37,12 @@ export default class CategoriesStore implements ILocalStore {
       method: 'get',
       url: 'https://api.escuelajs.co/api/v1/categories',
     });
+    if (!response.data) {
+      this._meta = Meta.error;
+      return;
+    }
+
     runInAction(() => {
-      if (!response.data) {
-        this._meta = Meta.error;
-      }
       try {
         this._meta = Meta.success;
         this._list.add(normalizeCategory(response.data));

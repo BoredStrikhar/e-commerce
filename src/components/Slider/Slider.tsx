@@ -15,7 +15,7 @@ export type SliderProps = {
 const Slider: React.FC<SliderProps> = ({ images, className }) => {
   return (
     <Swiper className={cn(s['slider'], className)} spaceBetween={50} slidesPerView={1}>
-      <SliderNavButtons />
+      {images.length > 1 && <SliderNavButtons />}
       {images.map((image) => {
         return (
           <SwiperSlide key={image}>

@@ -23,10 +23,10 @@ export default class SingleProductStore implements ILocalStore {
 
   constructor() {
     makeObservable<SingleProductStore, PrivateFields>(this, {
-      _product: observable,
+      _product: observable.ref,
       _meta: observable,
       _category: observable,
-      _relatedProducts: observable,
+      _relatedProducts: observable.ref,
       id: observable,
       product: computed,
       meta: computed,
@@ -63,11 +63,12 @@ export default class SingleProductStore implements ILocalStore {
       method: 'get',
       url: `https://api.escuelajs.co/api/v1/products/${id}`,
     });
+    if (!response.data) {
+      this._meta = Meta.error;
+      return;
+    }
 
     runInAction(() => {
-      if (!response.data) {
-        this._meta = Meta.error;
-      }
       try {
         this._meta = Meta.success;
         this._product.add(normalizeProduct([response.data]));
@@ -92,6 +93,10 @@ export default class SingleProductStore implements ILocalStore {
         categoryId: this._category,
       },
     });
+    if (!response.data) {
+      this._meta = Meta.error;
+      return;
+    }
 
     runInAction(() => {
       try {

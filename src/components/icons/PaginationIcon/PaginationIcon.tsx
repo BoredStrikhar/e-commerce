@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Icon, { IconProps } from 'components/icons/Icon';
 
-const PaginationIcon: React.FC<IconProps & { direction: 'left' | 'right' }> = ({
+const PaginationIcon: React.FC<IconProps & { direction: 'left' | 'right' | 'up' }> = ({
   className,
   width = '32px',
   height = '32px',
@@ -13,7 +13,7 @@ const PaginationIcon: React.FC<IconProps & { direction: 'left' | 'right' }> = ({
 }) => {
   const style = React.useMemo<React.CSSProperties>(
     () => ({
-      transform: `rotate(${direction === 'right' ? '180deg' : '0deg'})`,
+      transform: `rotate(${direction === 'right' ? '180deg' : direction === 'up' ? '90deg' : '0deg'})`,
     }),
     [direction],
   );
