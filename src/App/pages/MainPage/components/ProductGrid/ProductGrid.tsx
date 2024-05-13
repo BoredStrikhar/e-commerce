@@ -3,6 +3,7 @@ import React, { useCallback, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSearchParams } from 'react-router-dom';
 import Text from 'components/Text';
+import ProductsNotFoundIcon from 'components/icons/ProductsNotFoundIcon';
 import { useProductsStore } from 'store/ProductsStore/hooks';
 import { Meta } from 'utils/meta';
 import LoaderPage from '../../../../pages/LoaderPage';
@@ -13,6 +14,8 @@ const ProductGrid = () => {
   const productsStore = useProductsStore();
 
   const [, setSearchParams] = useSearchParams();
+
+  const productsPerPage = 9;
 
   const fetchMoreData = useCallback(() => {
     productsStore.fetchMoreProducts();
@@ -32,15 +35,12 @@ const ProductGrid = () => {
 
   useEffect(() => {
     productsStore.getProductsList({
-      title: productsStore.search,
-      categoryId: productsStore.currentCategory.key,
-      limit: (productsStore.currentPage + 1) * 9,
-      offset: 0,
+      limit: (productsStore.currentPage + 1) * productsPerPage,
     });
   }, [productsStore, productsStore.search, productsStore.currentCategory.key]);
 
   if (productsStore.meta === Meta.loading) {
-    return <LoaderPage></LoaderPage>;
+    return <LoaderPage />;
   }
 
   return (
@@ -53,14 +53,21 @@ const ProductGrid = () => {
           {productsStore.list.length}
         </Text>
       </div>
-      <InfiniteScroll
-        dataLength={productsStore.list.length}
-        next={fetchMoreData}
-        hasMore={productsStore.hasMore}
-        loader={<h4>Loading...</h4>}
-      >
-        <ProductList products={productsStore.list} />
-      </InfiniteScroll>
+      {productsStore.list.length ? (
+        <InfiniteScroll
+          dataLength={productsStore.list.length}
+          next={fetchMoreData}
+          hasMore={productsStore.hasMore}
+          loader={<h4>Loading...</h4>}
+        >
+          <ProductList products={productsStore.list} />
+        </InfiniteScroll>
+      ) : (
+        <div className={s['not-found']}>
+          <ProductsNotFoundIcon />
+          <Text view="title">No products found</Text>{' '}
+        </div>
+      )}
     </div>
   );
 };

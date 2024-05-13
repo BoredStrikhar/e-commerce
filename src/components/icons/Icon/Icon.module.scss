@@ -1,0 +1,14 @@
+.icon {
+    &_right {
+        transform: rotate(180deg);
+    }
+    &_down {
+        transform: rotate(270deg);
+    }
+    &_left {
+        transform: rotate(0deg);
+    }
+    &_up {
+        transform: rotate(90deg);
+    }
+}

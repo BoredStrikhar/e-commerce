@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from 'components/Layout';
-import { useQueryParamsStoreInit } from 'store/RootStore/hooks/useQueryParamsStoreInit.ts';
-import { routeConfig } from '../routes/routes.ts';
+import { useQueryParamsStoreInit } from 'store/RootStore/hooks/useQueryParamsStoreInit';
+import { routeConfig } from '../routes/routes';
 
 const App = () => {
   useQueryParamsStoreInit();
@@ -10,8 +10,7 @@ const App = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        {routeConfig.map(({ path, element }) => {
-          const Tag = element;
+        {routeConfig.map(({ path, element: Tag }) => {
           return <Route key={path} path={path} element={<Tag />} />;
         })}
       </Route>

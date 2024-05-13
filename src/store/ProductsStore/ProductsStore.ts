@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IReactionDisposer, action, computed, makeObservable, observable, reaction, runInAction } from 'mobx';
+import { CategoryModel } from '@store/models/Category';
 import { Option } from 'components/Dropdown';
 import rootStore from 'store/RootStore';
 import { ProductApi, ProductModel, normalizeProduct } from 'store/models/Product';
@@ -21,7 +22,7 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
 
   constructor() {
     makeObservable<ProductsStore, PrivateFields>(this, {
-      _list: observable,
+      _list: observable.ref,
       _meta: observable,
       _currentCategory: observable,
       _offset: observable,
@@ -67,7 +68,8 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
     return this._currentCategory;
   }
 
-  set currentCategory(category: Option) {
+  /**Установить текущую категорию в сторе (key, value)*/
+  setCurrentCategory(category: Option) {
     this._currentCategory.key = category.key;
     this._currentCategory.value = category.value;
   }
@@ -76,7 +78,8 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
     return this._offset;
   }
 
-  set offset(offset: number) {
+  /**Установить оффсет в сторе*/
+  setOffset(offset: number) {
     this._offset = offset;
   }
 
@@ -87,6 +90,10 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
   set currentPage(page: number) {
     this._currentPage = page;
   }
+
+  normalizeCategoriesList(categoriesData: CategoryModel[])  {
+    return categoriesData.map((item) => ({ key: item.id, value: item.name }));
+  };
 
   async getProductsList(params: GetProductsListParams): Promise<void> {
     this._meta = Meta.loading;
@@ -101,11 +108,12 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
         categoryId: this._currentCategory.key,
       },
     });
+    if (!response.data) {
+      this._meta = Meta.error;
+      return;
+    }
 
     runInAction(() => {
-      if (!response.data) {
-        this._meta = Meta.error;
-      }
       try {
         if (this._currentPage === 0) {
           this._currentPage = this._currentPage + 1;
@@ -133,6 +141,10 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
         categoryId: this._currentCategory.key,
       },
     });
+    if (!response.data) {
+      this._meta = Meta.error;
+      return;
+    }
 
     runInAction(() => {
       try {

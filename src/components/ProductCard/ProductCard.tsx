@@ -37,13 +37,12 @@ const ProductCard: React.FC<CardProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const [searchParams,] = useSearchParams('');
+  const [searchParams] = useSearchParams('');
 
   useEffect(() => {
     if (isLast && ref.current && searchParams.get('currentPage')) {
-      ref.current.scrollIntoView();
+      ref.current.scrollIntoView({ behavior: 'smooth' });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

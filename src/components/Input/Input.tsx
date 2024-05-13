@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 import s from './Input.module.scss';
 
@@ -26,4 +25,4 @@ const Input: React.FC<InputProps> = ({ className, value, onChange, afterSlot, ..
   );
 };
 
-export default observer(Input);
+export default Input;

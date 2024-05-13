@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -11,19 +11,23 @@ const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams('');
   const [currentValue, setCurrentValue] = useState(searchParams.get('search') || '');
 
-  const handleChange = useCallback((e: string) => {
-    setCurrentValue(e);
+  useEffect(() => {
+    setCurrentValue(productsStore.search);
+  }, [productsStore.search]);
+
+  const handleChange = useCallback((value: string) => {
+    setCurrentValue(value);
   }, []);
 
-  const handleButtonClick = (e: { preventDefault: () => void }) => {
+  const handleButtonClick = (e: React.FormEvent) => {
     e.preventDefault();
-    setSearchParams({ search: currentValue, category: productsStore.currentCategory.key.toString() });
+    setSearchParams({ search: currentValue, categoryId: productsStore.currentCategory.key.toString() });
   };
 
   return (
-    <form className={s['search']}>
+    <form className={s['search']} onSubmit={handleButtonClick}>
       <Input placeholder="Search product" value={currentValue} onChange={handleChange}></Input>
-      <Button className={s['search__button']} onClick={handleButtonClick}>
+      <Button className={s['search__button']} type="submit">
         Find now
       </Button>
     </form>
