@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IReactionDisposer, action, computed, makeObservable, observable, reaction, runInAction } from 'mobx';
+import { CategoryModel } from '@store/models/Category';
 import { Option } from 'components/Dropdown';
 import rootStore from 'store/RootStore';
 import { ProductApi, ProductModel, normalizeProduct } from 'store/models/Product';
@@ -89,6 +90,10 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
   set currentPage(page: number) {
     this._currentPage = page;
   }
+
+  normalizeCategoriesList(categoriesData: CategoryModel[])  {
+    return categoriesData.map((item) => ({ key: item.id, value: item.name }));
+  };
 
   async getProductsList(params: GetProductsListParams): Promise<void> {
     this._meta = Meta.loading;

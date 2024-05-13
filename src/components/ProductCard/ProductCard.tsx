@@ -41,7 +41,7 @@ const ProductCard: React.FC<CardProps> = ({
 
   useEffect(() => {
     if (isLast && ref.current && searchParams.get('currentPage')) {
-      ref.current.scrollIntoView();
+      ref.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
 

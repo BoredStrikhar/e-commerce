@@ -15,6 +15,8 @@ const ProductGrid = () => {
 
   const [, setSearchParams] = useSearchParams();
 
+  const productsPerPage = 9;
+
   const fetchMoreData = useCallback(() => {
     productsStore.fetchMoreProducts();
     setSearchParams((prev) => {
@@ -33,7 +35,7 @@ const ProductGrid = () => {
 
   useEffect(() => {
     productsStore.getProductsList({
-      limit: (productsStore.currentPage + 1) * 9
+      limit: (productsStore.currentPage + 1) * productsPerPage,
     });
   }, [productsStore, productsStore.search, productsStore.currentCategory.key]);
 

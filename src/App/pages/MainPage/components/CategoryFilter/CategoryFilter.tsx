@@ -1,24 +1,15 @@
-import { observer, useLocalStore } from 'mobx-react-lite';
-import React, { useCallback, useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useCallback, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Dropdown, { Option } from 'components/Dropdown';
 import CategoriesStore from 'store/CategoriesStore';
 import { useProductsStore } from 'store/ProductsStore/hooks';
-import normalizeCategoriesList from 'store/models/NormalizeCategoriesList';
+import { useLocalStore } from 'utils/useLocalStore';
 
 const CategoryFilter = () => {
   const categoriesStore = useLocalStore(() => new CategoriesStore());
   const productsStore = useProductsStore();
   const [searchParams, setSearchParams] = useSearchParams('');
-  const [currentValue, setCurrentValue] = useState(productsStore.currentCategory);
-
-  useEffect(() => {
-    if (productsStore.currentCategory.key === 0) {
-      setCurrentValue({ key: 0, value: '' });
-      return;
-    }
-    setCurrentValue(productsStore.currentCategory);
-  }, [productsStore.currentCategory, productsStore.currentCategory.key]);
 
   useEffect(() => {
     const category = categoriesStore.list.find((el) => el.id.toString() === searchParams.get('categoryId'));
@@ -35,9 +26,7 @@ const CategoryFilter = () => {
 
   const getTitle = useCallback((value: Option) => (value.value ? value.value : ''), []);
 
-  const normalizedCategories = normalizeCategoriesList(categoriesStore.list);
-
-  return <Dropdown options={normalizedCategories} value={currentValue} onChange={setValue} getTitle={getTitle} />;
+  return <Dropdown options={productsStore.normalizeCategoriesList(categoriesStore.list)} value={productsStore.currentCategory} onChange={setValue} getTitle={getTitle} />;
 };
 
 export default observer(CategoryFilter);

@@ -5,6 +5,7 @@ import s from './ScrollToTopButton.module.scss';
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const scrollTopOffset = 500;
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -15,7 +16,7 @@ const ScrollToTopButton = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 500);
+      setIsVisible(window.scrollY > scrollTopOffset);
     };
 
     window.addEventListener('scroll', toggleVisibility);
