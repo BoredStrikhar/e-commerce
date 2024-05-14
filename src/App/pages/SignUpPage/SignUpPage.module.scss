@@ -1,0 +1,70 @@
+@import "styles/mixins";
+.sign-up-wrapper {
+    @include container;
+    flex-direction: column;
+}
+
+.sign-up-card {
+    @include container;
+    flex-direction: column;
+    background-color: $color-white-smoke;
+    border-radius: 24px;
+    padding: 32px;
+    margin-top: 64px;
+    width: 360px;
+}
+
+.sign-up-form {
+    @include container;
+    flex-direction: column;
+    width: 100%;
+    &__title {
+        margin-bottom: 12px;
+    }
+    &__input {
+        margin: 10px 0px;
+        &_invalid {
+            border: 1px solid $color-red;
+        }
+        &_invalid:focus-within {
+            border: 1px solid $color-red;
+        }
+    }
+    &__button {
+        margin-top: 12px;
+    }
+    &__invalid-text {
+        text-align: center;
+        color: $color-red;
+    }
+    &__new-user-text {
+        padding-top: 12px;
+    }
+}
+
+.strength-checker {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &__progress-bar {
+        height: 4px;
+        &_Weak {
+            width: 33%;
+            background-color: $color-red;
+        }
+        &_Medium {
+            width: 66%;
+            background-color: $color-yellow;
+        }
+        &_Strong {
+            width: 100%;
+            background-color: $color-breaker-bay;
+        }
+    }
+    &__title {
+        padding-top: 8px;
+        text-align: center;
+    }
+}

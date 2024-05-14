@@ -41,7 +41,7 @@ const Header = () => {
           <LinkIcon to="/">
             <ShoppingCartIcon />
           </LinkIcon>
-          <LinkIcon to="/">
+          <LinkIcon to="/profile">
             <ProfileIcon className={s['header__profile-icon']} />
           </LinkIcon>
         </div>

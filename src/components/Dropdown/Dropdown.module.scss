@@ -1,19 +1,19 @@
 @import "styles/mixins";
 .dropdown {
-  width: 300px;
-  position: relative;
-  &__options {
-    margin-top: 8px;
-    width: 100%;
-    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
-    background: $color-white;
-    position: absolute;
-    top: 20;
-    max-height: 580px;
-    overflow-y: scroll;
-  }
-  &__option-text {
-    padding: 14px 12px;
-    height: 48px;
-  }
+    width: 300px;
+    position: relative;
+    &__options {
+        margin-top: 8px;
+        width: 100%;
+        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+        background: $color-white;
+        position: absolute;
+        top: 20;
+        max-height: 580px;
+        overflow-y: auto;
+    }
+    &__option-text {
+        padding: 14px 12px;
+        height: 48px;
+    }
 }

@@ -1,0 +1,5 @@
+@import "styles/mixins";
+.profile-wrapper {
+  @include container;
+  flex-direction: column;
+}
