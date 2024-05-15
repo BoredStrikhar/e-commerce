@@ -41,8 +41,10 @@
   }
   &__icons {
     @include container;
+    height: 64px;
   }
-  &__profile-icon {
-    margin-left: 24px;
+  &__shopping-cart-icon {
+    margin-right: 24px;
+    height: 32px;
   }
 }

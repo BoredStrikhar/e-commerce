@@ -38,8 +38,8 @@ const Header = () => {
           ))}
         </div>
         <div className={s['header__icons']}>
-          <LinkIcon to="/">
-            <ShoppingCartIcon />
+          <LinkIcon to="/cart">
+            <ShoppingCartIcon className={s['header__shopping-cart-icon']} />
           </LinkIcon>
           <LinkIcon to="/profile">
             <ProfileIcon className={s['header__profile-icon']} />

@@ -1,0 +1,50 @@
+@import "styles/mixins";
+.cart {
+    @include container;
+    flex-direction: column;
+    padding-top: 32px;
+    width: 100%;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60%;
+    padding-top: 16px;
+    &__image {
+        width: 12%;
+    }
+    &__title {
+        padding-left: 32px;
+        width: 38%;
+    }
+    &__price {
+        padding-left: 32px;
+        width: 20%;
+    }
+    &__total-price {
+        padding-left: 32px;
+    }
+}
+
+.product-amount-buttons {
+    @include container;
+    &__button {
+        @include container;
+        border-radius: 16px;
+        width: 64px;
+        height: 48px;
+    }
+    &__amount {
+        padding: 0px 16px;
+    }
+}
+
+.total-block {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 18px;
+    padding-right: 24px;
+}

@@ -1,8 +1,22 @@
+@import "styles/mixins";
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 360px);
-  grid-column-gap: 79px;
-  grid-row-gap: 30px;
-  padding-top: 32px;
-  grid-template-rows: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, 360px);
+    grid-column-gap: 79px;
+    grid-row-gap: 30px;
+    padding-top: 32px;
+    grid-template-rows: max-content;
+}
+
+.product-amount-buttons {
+    @include container;
+    &__button {
+        border-radius: 16px;
+        width: 64px;
+        height: 48px;
+        @include container;
+    }
+    &__amount {
+        padding: 0px 16px;
+    }
 }

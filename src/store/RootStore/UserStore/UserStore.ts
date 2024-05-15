@@ -54,7 +54,13 @@ export class UserStore {
       try {
         this._meta = Meta.success;
         this._user = response.data;
-        navigate();
+        this.signIn(
+          {
+            email: this._user.email,
+            password: this._user.password,
+          },
+          navigate,
+        );
         return;
       } catch (e) {
         this._meta = Meta.error;
@@ -62,7 +68,7 @@ export class UserStore {
     });
   }
 
-  async signIn(params: UserLoginModel, navigate: () => void): Promise<void> {
+  async signIn(params: UserLoginModel, navigate?: () => void): Promise<void> {
     this._meta = Meta.loading;
     this._error = '';
 
@@ -78,8 +84,9 @@ export class UserStore {
           this._meta = Meta.success;
           localStorage.setItem('access_token', response.data.access_token);
           localStorage.setItem('refresh_token', response.data.refresh_token);
-          this.getProfile();
-          navigate();
+          if (navigate) {
+            navigate();
+          }
           return;
         });
       }

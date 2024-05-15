@@ -1,3 +1,4 @@
+import CartPage from '../App/pages/CartPage';
 import MainPage from '../App/pages/MainPage';
 import NotFoundPage from '../App/pages/NotFoundPage';
 import ProductPage from '../App/pages/ProductPage';
@@ -12,6 +13,7 @@ export enum ERoutePathType {
   SIGNUP = '/signup',
   SIGNIN = '/signin',
   PROFILE = '/profile',
+  CART = '/cart',
 }
 
 export const routeConfig = [
@@ -38,5 +40,9 @@ export const routeConfig = [
   {
     path: ERoutePathType.PROFILE,
     element: ProfilePage,
+  },
+  {
+    path: ERoutePathType.CART,
+    element: CartPage,
   },
 ];

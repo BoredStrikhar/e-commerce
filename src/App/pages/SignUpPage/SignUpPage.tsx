@@ -38,7 +38,6 @@ const SignUpPage = () => {
 
   const handleSignUpClick = (e: React.FormEvent) => {
     e.preventDefault();
-
     rootStore.user.signUp(
       {
         name: currentNameValue,
@@ -49,7 +48,7 @@ const SignUpPage = () => {
           'https://freedomtoteach.collins.co.uk/wp-content/uploads/sites/87/2023/03/shutterstock_397626016-1-scaled.jpg',
       },
       () => {
-        navigate(`/signin`);
+        navigate(`/profile`);
       },
     );
   };

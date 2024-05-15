@@ -69,7 +69,7 @@ const SignInPage = () => {
             type="password"
             className={s['sign-in-form__input']}
           />
-          {rootStore.user.error && <Text className={s['sign-up-form__invalid-text']}>Invalid email or password</Text>}
+          {rootStore.user.error && <Text className={s['sign-in-form__invalid-text']}>Invalid email or password</Text>}
 
           <Button className={s['sign-in-form__button']} type="submit" disabled={!isEmailValid || !currentPasswordValue}>
             Sign In
