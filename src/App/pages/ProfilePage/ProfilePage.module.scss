@@ -1,5 +1,39 @@
 @import "styles/mixins";
 .profile-wrapper {
-  @include container;
-  flex-direction: column;
+    width: 100%;
+    min-width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 36px;
+    padding-bottom: 80px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    &__name {
+        padding-top: 14px;
+    }
+    &__email {
+        padding-top: 4px;
+        padding-bottom: 12px;
+    }
+}
+
+.orders {
+    width: 80%;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    &__order {
+        background-color: $color-breaker-bay;
+        width: 50%;
+        margin-top: 20px;
+        padding: 32px;
+        border-radius: 24px;
+    }
+    &__text_empty {
+        padding-top: 12px;
+    }
 }

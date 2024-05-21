@@ -4,13 +4,20 @@
     flex-direction: column;
     padding-top: 32px;
     width: 100%;
+    min-width: 1240px;
+    &__text_empty {
+        padding-top: 24px;
+    }
+    &__button_empty {
+        margin-top: 32px;
+    }
 }
 
 .product {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 60%;
+    width: 80%;
     padding-top: 16px;
     &__image {
         width: 12%;
@@ -42,9 +49,13 @@
 }
 
 .total-block {
-    width: 60%;
+    width: 80%;
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
     padding-top: 18px;
     padding-right: 24px;
+    &__button {
+        margin-top: 18px;
+    }
 }

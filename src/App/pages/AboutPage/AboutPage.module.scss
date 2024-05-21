@@ -1,0 +1,46 @@
+@import "styles/mixins";
+.about-page {
+    @include container;
+    flex-direction: column;
+    padding-top: 32px;
+    padding-bottom: 80px;
+    max-width: 1240px;
+    width: 100%;
+}
+
+.container {
+    @include container;
+    width: 100%;
+    padding-top: 32px;
+    &__text-left {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    &__text-right {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    &__image {
+        width: 240px;
+    }
+    &__image-left {
+        @include container;
+        width: 30%;
+    }
+    &__image-right {
+        @include container;
+        width: 30%;
+    }
+    &__text_left {
+        padding-top: 18px;
+        text-align: left;
+    }
+    &__text_right {
+        padding-top: 18px;
+        text-align: right;
+    }
+}

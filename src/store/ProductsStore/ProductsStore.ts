@@ -9,7 +9,7 @@ import { Meta } from 'utils/meta';
 import { ILocalStore } from 'utils/useLocalStore';
 import { GetProductsListParams, IProductsStore } from './types';
 
-type PrivateFields = '_list' | '_meta' | '_currentCategory' | '_offset' | '_currentPage';
+type PrivateFields = '_list' | '_meta' | '_currentCategory' | '_offset' | '_currentPage' | '_fullListLength';
 
 export default class ProductsStore implements IProductsStore, ILocalStore {
   private _list: Collection<number, ProductModel> = new Collection<number, ProductModel>([], (element) => element.id);
@@ -17,6 +17,7 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
   private _currentCategory: Option = { key: 0, value: '' };
   private _offset: number = 0;
   private _currentPage: number = 0;
+  private _fullListLength: number = 0;
   search: string = '';
   hasMore: boolean = true;
 
@@ -27,6 +28,7 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
       _currentCategory: observable,
       _offset: observable,
       _currentPage: observable,
+      _fullListLength: observable,
       search: observable,
       hasMore: observable,
       list: computed,
@@ -34,8 +36,10 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
       currentCategory: computed,
       offset: computed,
       currentPage: computed,
+      fullListLength: computed,
       getProductsList: action,
       fetchMoreProducts: action,
+      getFullListLength: action,
     });
 
     const initialSearch = rootStore.query.getParam('search');
@@ -91,9 +95,13 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
     this._currentPage = page;
   }
 
-  normalizeCategoriesList(categoriesData: CategoryModel[])  {
+  get fullListLength(): number {
+    return this._fullListLength;
+  }
+
+  normalizeCategoriesList(categoriesData: CategoryModel[]) {
     return categoriesData.map((item) => ({ key: item.id, value: item.name }));
-  };
+  }
 
   async getProductsList(params: GetProductsListParams): Promise<void> {
     this._meta = Meta.loading;
@@ -126,6 +134,33 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
       } catch (e) {
         this._meta = Meta.error;
         this._list.clear();
+      }
+    });
+  }
+
+  async getFullListLength(): Promise<void> {
+    this._meta = Meta.loading;
+    this._list.clear();
+    const response = await axios<ProductApi[]>({
+      method: 'get',
+      url: 'https://api.escuelajs.co/api/v1/products',
+      params: {
+        title: this.search,
+        categoryId: this._currentCategory.key,
+      },
+    });
+    if (!response.data) {
+      this._meta = Meta.error;
+      return;
+    }
+
+    runInAction(() => {
+      try {
+        this._fullListLength = response.data.length;
+        this._meta = Meta.success;
+        return;
+      } catch (e) {
+        this._meta = Meta.error;
       }
     });
   }

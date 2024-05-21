@@ -1,0 +1,31 @@
+@import "styles/mixins";
+.categories-wrapper {
+  @include container;
+  flex-direction: column;
+  padding-top: 32px;
+  width: 100%;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 360px);
+  grid-column-gap: 79px;
+  grid-row-gap: 30px;
+  padding-top: 32px;
+  grid-template-rows: max-content;
+  &__category {
+    @include container;
+    flex-direction: column;
+    background: $color-white;
+    cursor: pointer;
+  }
+  &__category:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+  }
+  &__image {
+    width: 100%;
+  }
+  &__title {
+    padding: 24px 0px;
+  }
+}

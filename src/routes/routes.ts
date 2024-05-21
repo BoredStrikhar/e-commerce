@@ -1,10 +1,14 @@
+import AboutPage from '../App/pages/AboutPage';
 import CartPage from '../App/pages/CartPage';
+import CategoriesPage from '../App/pages/CategoriesPage';
+import CheckoutPage from '../App/pages/CheckoutPage';
 import MainPage from '../App/pages/MainPage';
 import NotFoundPage from '../App/pages/NotFoundPage';
 import ProductPage from '../App/pages/ProductPage';
 import ProfilePage from '../App/pages/ProfilePage';
 import SignInPage from '../App/pages/SignInPage';
 import SignUpPage from '../App/pages/SignUpPage';
+import SuccessPage from '../App/pages/SuccessPage';
 
 export enum ERoutePathType {
   INDEX = '/',
@@ -14,6 +18,10 @@ export enum ERoutePathType {
   SIGNIN = '/signin',
   PROFILE = '/profile',
   CART = '/cart',
+  CHECKOUT = '/checkout',
+  CATEGORIES = '/categories',
+  ABOUT = '/about',
+  SUCCESS = '/success'
 }
 
 export const routeConfig = [
@@ -44,5 +52,21 @@ export const routeConfig = [
   {
     path: ERoutePathType.CART,
     element: CartPage,
+  },
+  {
+    path: ERoutePathType.CHECKOUT,
+    element: CheckoutPage,
+  },
+  {
+    path: ERoutePathType.CATEGORIES,
+    element: CategoriesPage,
+  },
+  {
+    path: ERoutePathType.ABOUT,
+    element: AboutPage,
+  },
+  {
+    path: ERoutePathType.SUCCESS,
+    element: SuccessPage,
   },
 ];

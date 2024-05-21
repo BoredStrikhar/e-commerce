@@ -28,6 +28,7 @@ export class CartStore {
       cartTotal: computed,
       addProductToCart: action,
       removeProductFromCart: action,
+      removeCart: action,
       getProducts: action,
     });
 
@@ -99,10 +100,21 @@ export class CartStore {
     }
   }
 
+  removeCart() {
+    this._cart = {};
+    this._cartTotal = 0;
+    this._products = new Collection<number, ProductModel>([], (element) => element.id);
+    localStorage.removeItem('cart');
+  }
+
   async getProducts(): Promise<void> {
     this._meta = Meta.loading;
     this._products.clear();
     const idList = Object.keys(this._cart);
+    if (!idList.length) {
+      this._meta = Meta.empty;
+      return;
+    }
     idList.forEach((id) => {
       axios<ProductApi>({
         method: 'get',

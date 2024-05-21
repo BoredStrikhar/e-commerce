@@ -126,7 +126,9 @@ const SignUpPage = () => {
             <Text view="p-16" className={s['sign-up-form__new-user-text']}>
               Already have an account?
             </Text>
-            <Link to="/signin">Sign In</Link>
+            <Link to="/signin">
+              <Text color="accent">Sign In</Text>
+            </Link>
           </form>
         </div>
       </div>

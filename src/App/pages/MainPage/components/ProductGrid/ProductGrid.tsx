@@ -17,6 +17,10 @@ const ProductGrid = () => {
 
   const productsPerPage = 9;
 
+  useEffect(() => {
+    productsStore.getFullListLength();
+  }, []);
+
   const fetchMoreData = useCallback(() => {
     productsStore.fetchMoreProducts();
     setSearchParams((prev) => {
@@ -50,7 +54,7 @@ const ProductGrid = () => {
           Total Product
         </Text>
         <Text className={s['product-grid__quantity']} weight="bold" view="p-20" color="accent">
-          {productsStore.list.length}
+          {productsStore.fullListLength}
         </Text>
       </div>
       {productsStore.list.length ? (
@@ -65,7 +69,7 @@ const ProductGrid = () => {
       ) : (
         <div className={s['not-found']}>
           <ProductsNotFoundIcon />
-          <Text view="title">No products found</Text>{' '}
+          <Text view="title">No products found</Text>
         </div>
       )}
     </div>

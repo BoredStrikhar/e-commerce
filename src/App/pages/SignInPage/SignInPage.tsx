@@ -77,7 +77,9 @@ const SignInPage = () => {
           <Text view="p-16" className={s['sign-in-form__new-user-text']}>
             New to Lalasia?
           </Text>
-          <Link to="/signup">Create an account</Link>
+          <Link to="/signup">
+            <Text color='accent'>Create an account</Text>
+          </Link>
         </form>
       </div>
     </div>

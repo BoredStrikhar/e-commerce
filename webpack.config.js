@@ -96,6 +96,7 @@ module.exports = {
       styles: path.join(srcPath, 'styles'),
       utils: path.join(srcPath, 'utils'),
       store: path.join(srcPath, 'store'),
+      assets: path.join(srcPath, 'assets'),
     },
   },
 };

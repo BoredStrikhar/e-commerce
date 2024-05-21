@@ -1,14 +1,21 @@
 @import "./fonts.scss";
+@import "styles/mixins";
 html,
 body {
-  font-family: "Roboto";
-  margin: 0;
-  padding: 0;
-  background: #fafafa;
+    font-family: "Roboto";
+    margin: 0;
+    padding: 0;
+    background: #fafafa;
+}
+
+#root {
+    min-height: 100vh;
+    @include container;
+    flex-direction: column;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 h1,
@@ -21,9 +28,9 @@ p,
 blockquote,
 figure,
 pre {
-  margin: 0;
+    margin: 0;
 }
 
 :root {
-  --font-family: "Roboto", sans-serif;
+    --font-family: "Roboto", sans-serif;
 }
