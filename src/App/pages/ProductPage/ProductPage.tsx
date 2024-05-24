@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
 import BackButton from 'components/BackButton';
-import Button from 'components/Button';
+import ProductCartButtons from 'components/ProductCartButtons';
 import Slider from 'components/Slider';
 import Text from 'components/Text';
 import SingleProductStore from 'store/SingleProductStore';
@@ -47,24 +47,21 @@ const ProductPage = () => {
                 {'$' + singleProductStore.product.price}
               </Text>
               <div className={s['product-page__product-buttons-container']}>
-                <Button>
-                  <Text view="button">Buy Now</Text>
-                </Button>
-                <Button className={s['product-page__add-to-cart-button']}>
-                  <Text view="button" color="primary">
-                    Add to Cart
-                  </Text>
-                </Button>
+                <ProductCartButtons productId={singleProductStore.product.id} />
               </div>
             </div>
           </div>
         </div>
-        <div className={s['product-page__related-items-container']}>
-          <Text className={s['product-page__related-items-title']} view="title" weight="bold">
-            Related Items
-          </Text>
-        </div>
-        <ProductList products={singleProductStore.relatedProducts} />
+        {Boolean(singleProductStore.relatedProducts.length) && (
+          <>
+            <div className={s['product-page__related-items-header']}>
+              <Text className={s['product-page__related-items-title']} view="title" weight="bold">
+                Related Items
+              </Text>
+            </div>
+            <ProductList products={singleProductStore.relatedProducts} />
+          </>
+        )}
       </div>
     </div>
   );

@@ -31,17 +31,17 @@ const Header = () => {
                 [s['current']]: location.pathname === item.url,
               })}
             >
-              <Text view="p-18" color="primary">
+              <Text view="p-18" color="primary" className={s['header__page-text']}>
                 {item.title}
               </Text>
             </Link>
           ))}
         </div>
         <div className={s['header__icons']}>
-          <LinkIcon to="/">
-            <ShoppingCartIcon />
+          <LinkIcon to="/cart">
+            <ShoppingCartIcon className={s['header__shopping-cart-icon']} />
           </LinkIcon>
-          <LinkIcon to="/">
+          <LinkIcon to="/profile">
             <ProfileIcon className={s['header__profile-icon']} />
           </LinkIcon>
         </div>

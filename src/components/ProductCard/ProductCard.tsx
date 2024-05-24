@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import React, { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import img from 'assets/noimage.png';
 import Text from '../Text/Text';
 import s from './ProductCard.module.scss';
 
@@ -47,7 +48,14 @@ const ProductCard: React.FC<CardProps> = ({
 
   return (
     <div className={cn(s['product-card'], className)} onClick={onClick} ref={ref}>
-      <img className={s['product-card__image']} src={image} alt="product"></img>
+      <img
+        className={s['product-card__image']}
+        src={image}
+        alt="product"
+        onError={({ currentTarget }) => {
+          currentTarget.src = img;
+        }}
+      ></img>
       <div className={s['product-card__body']}>
         <div>
           {captionSlot && (

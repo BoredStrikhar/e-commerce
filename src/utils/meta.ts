@@ -3,4 +3,5 @@ export enum Meta {
   loading = 'loading',
   error = 'error',
   success = 'success',
+  empty = 'empty',
 }

@@ -39,10 +39,17 @@
       border-bottom: 3px solid $color-text-accent;
     }
   }
+  &__page-text {
+    &:hover {
+      color: $color-breaker-bay;
+    }
+  }
   &__icons {
     @include container;
+    height: 64px;
   }
-  &__profile-icon {
-    margin-left: 24px;
+  &__shopping-cart-icon {
+    margin-right: 24px;
+    height: 32px;
   }
 }

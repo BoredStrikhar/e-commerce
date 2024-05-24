@@ -1,0 +1,16 @@
+@import "styles/mixins";
+.shopping-cart {
+    position: relative;
+    top: 0;
+    &__counter {
+        @include container;
+        position: absolute;
+        top: -10px;
+        left: 18px;
+        background-color: $color-breaker-bay;
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+        z-index: 11;
+    }
+}

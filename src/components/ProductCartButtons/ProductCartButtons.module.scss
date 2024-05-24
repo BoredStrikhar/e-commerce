@@ -1,0 +1,13 @@
+@import "styles/mixins";
+.product-cart-buttons {
+    @include container;
+    &__button {
+        border-radius: 16px;
+        width: 64px;
+        height: 48px;
+        @include container;
+    }
+    &__amount {
+        padding: 0px 16px;
+    }
+}

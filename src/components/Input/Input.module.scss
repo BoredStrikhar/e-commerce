@@ -9,8 +9,12 @@
   align-items: center;
   padding-left: 14px;
   padding-right: 14px;
+  position: relative;
   &:focus-within {
     border: 1px solid $color-input-border-focus;
+  }
+  &:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 }
 

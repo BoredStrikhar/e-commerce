@@ -1,0 +1,67 @@
+@import "styles/mixins";
+.profile-wrapper {
+    width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 36px;
+    padding-bottom: 80px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    &__name {
+        padding-top: 14px;
+    }
+    &__email {
+        padding-top: 4px;
+        padding-bottom: 12px;
+    }
+}
+
+.orders {
+    width: 80%;
+    padding-left: 100px;
+    display: flex;
+    flex-direction: column;
+    &__text_empty {
+        padding-top: 12px;
+    }
+    &__header {
+        display: flex;
+        align-items: center;
+    }
+    &__counter {
+        padding-left: 18px;
+    }
+}
+
+.order {
+    background-color: $color-breaker-bay;
+    width: 70%;
+    margin-top: 20px;
+    padding: 32px;
+    border-radius: 24px;
+    &__price {
+        padding-top: 4px;
+    }
+    &__products {
+        padding-top: 4px;
+    }
+    &__product-wrapper {
+        padding-top: 4px;
+        display: flex;
+    }
+    &__image {
+        width: 40%;
+    }
+    &__product-info-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding-left: 24px;
+    }
+    &__review-input {
+        height: 124px;
+    }
+}

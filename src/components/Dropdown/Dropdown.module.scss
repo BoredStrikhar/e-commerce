@@ -10,10 +10,24 @@
     position: absolute;
     top: 20;
     max-height: 580px;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   &__option-text {
     padding: 14px 12px;
     height: 48px;
+  }
+  &__icons-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__cross-icon-wrapper {
+    padding-top: 6px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__input_removed-caret {
+    caret-color: transparent;
   }
 }

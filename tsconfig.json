@@ -18,7 +18,8 @@
       "@config/*": ["config/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
-      "@store/*": ["store/*"]
+      "@store/*": ["store/*"],
+      "@assets/*": ["assets/*"]
     }
   },
 

@@ -1,0 +1,27 @@
+@import "styles/mixins";
+a {
+    text-decoration: none;
+}
+
+.footer-container {
+    @include container;
+    width: 100%;
+    background: $color-maire;
+    border-top: 2px solid $color-white-smoke;
+    height: 120px;
+    margin-top: auto;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1240px;
+    &__menu {
+        @include container;
+    }
+    &__page {
+        margin-left: 48px;
+    }
+}

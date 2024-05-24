@@ -37,6 +37,7 @@ const ProductGrid = () => {
     productsStore.getProductsList({
       limit: (productsStore.currentPage + 1) * productsPerPage,
     });
+    productsStore.getFullListLength();
   }, [productsStore, productsStore.search, productsStore.currentCategory.key]);
 
   if (productsStore.meta === Meta.loading) {
@@ -50,7 +51,7 @@ const ProductGrid = () => {
           Total Product
         </Text>
         <Text className={s['product-grid__quantity']} weight="bold" view="p-20" color="accent">
-          {productsStore.list.length}
+          {productsStore.fullListLength}
         </Text>
       </div>
       {productsStore.list.length ? (
@@ -65,7 +66,7 @@ const ProductGrid = () => {
       ) : (
         <div className={s['not-found']}>
           <ProductsNotFoundIcon />
-          <Text view="title">No products found</Text>{' '}
+          <Text view="title">No products found</Text>
         </div>
       )}
     </div>

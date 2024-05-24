@@ -1,0 +1,44 @@
+@import "styles/mixins";
+.sign-in-wrapper {
+    @include container;
+    flex-direction: column;
+    padding-bottom: 80px;
+}
+
+.sign-in-card {
+    @include container;
+    flex-direction: column;
+    background-color: $color-white-smoke;
+    border-radius: 24px;
+    padding: 32px;
+    margin-top: 64px;
+    width: 360px;
+}
+
+.sign-in-form {
+    @include container;
+    flex-direction: column;
+    width: 100%;
+    &__title {
+        margin-bottom: 12px;
+    }
+    &__input {
+        margin: 10px 0px;
+        &_invalid {
+            border: 1px solid $color-red;
+        }
+        &_invalid:focus-within {
+            border: 1px solid $color-red;
+        }
+    }
+    &__button {
+        margin-top: 12px;
+    }
+    &__invalid-text {
+        text-align: center;
+        color: $color-red;
+    }
+    &__new-user-text {
+        padding-top: 12px;
+    }
+}

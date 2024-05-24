@@ -1,7 +1,8 @@
-import React, { memo, useCallback } from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from 'components/Button';
 import ProductCard from 'components/ProductCard';
+import ProductCartButtons from 'components/ProductCartButtons';
 import { ProductModel } from 'store/models/Product';
 import s from './ProductList.module.scss';
 
@@ -10,10 +11,8 @@ type ProductListProps = {
 };
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
-  const handleButtonClick = (e: { stopPropagation: () => void }) => {
-    e.stopPropagation();
-  };
   const navigate = useNavigate();
+
   const handleCardClick = useCallback(
     (id: number) => {
       navigate(`/product/${id}`);
@@ -32,7 +31,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
           title={product.title}
           subtitle={product.description}
           contentSlot={'$' + product.price}
-          actionSlot={<Button onClick={handleButtonClick}>Add to Cart</Button>}
+          actionSlot={<ProductCartButtons productId={product.id}/>}
           onClick={() => handleCardClick(product.id)}
         />
       ))}
@@ -40,4 +39,4 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
   );
 };
 
-export default memo(ProductList);
+export default observer(ProductList);
