@@ -1,12 +1,13 @@
 {
-    "name": "ecom-app",
+    "name": "e-commerce",
     "private": true,
-    "main": "src/main.tsx",
     "version": "0.0.0",
     "homepage": "https://boredstrikhar.github.io/e-commerce",
     "scripts": {
+        "build": "webpack --mode production",
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d dist",
         "dev": "cross-env NODE_ENV=development npx webpack serve --mode=development",
-        "build": "cross-env NODE_ENV=production npx webpack --mode=production",
         "preview": "vite preview",
         "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx}\"",
         "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx}\" --fix"

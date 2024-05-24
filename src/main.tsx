@@ -6,7 +6,7 @@ import './styles/styles.scss';
 import './config/configureMobX';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Router.BrowserRouter>
+  <Router.HashRouter>
     <App />
-  </Router.BrowserRouter>,
+  </Router.HashRouter>,
 );
