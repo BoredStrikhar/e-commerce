@@ -31,7 +31,7 @@ const Header = () => {
                 [s['current']]: location.pathname === item.url,
               })}
             >
-              <Text view="p-18" color="primary">
+              <Text view="p-18" color="primary" className={s['header__page-text']}>
                 {item.title}
               </Text>
             </Link>

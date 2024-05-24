@@ -47,17 +47,21 @@ const ProductPage = () => {
                 {'$' + singleProductStore.product.price}
               </Text>
               <div className={s['product-page__product-buttons-container']}>
-                <ProductCartButtons productId={singleProductStore.product.id}/>
+                <ProductCartButtons productId={singleProductStore.product.id} />
               </div>
             </div>
           </div>
         </div>
-        <div className={s['product-page__related-items-container']}>
-          <Text className={s['product-page__related-items-title']} view="title" weight="bold">
-            Related Items
-          </Text>
-        </div>
-        <ProductList products={singleProductStore.relatedProducts} />
+        {Boolean(singleProductStore.relatedProducts.length) && (
+          <>
+            <div className={s['product-page__related-items-header']}>
+              <Text className={s['product-page__related-items-title']} view="title" weight="bold">
+                Related Items
+              </Text>
+            </div>
+            <ProductList products={singleProductStore.relatedProducts} />
+          </>
+        )}
       </div>
     </div>
   );

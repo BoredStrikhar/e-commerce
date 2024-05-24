@@ -10,17 +10,17 @@ type ProductCartButtonsProps = {
 };
 
 const ProductCartButtons: React.FC<ProductCartButtonsProps> = ({ productId }) => {
-  const handleButtonClick = (e: { stopPropagation: () => void }, id: number) => {
+  const handleButtonClick = (e: React.FormEvent, id: number) => {
     e.stopPropagation();
     rootStore.cart.addProductToCart(id.toString());
   };
 
-  const handleDecreaseClick = (e: { stopPropagation: () => void }, id: number) => {
+  const handleDecreaseClick = (e: React.FormEvent, id: number) => {
     e.stopPropagation();
     rootStore.cart.removeProductFromCart(id.toString());
   };
 
-  const handleIncreaseClick = (e: { stopPropagation: () => void }, id: number) => {
+  const handleIncreaseClick = (e: React.FormEvent, id: number) => {
     e.stopPropagation();
     rootStore.cart.addProductToCart(id.toString());
   };

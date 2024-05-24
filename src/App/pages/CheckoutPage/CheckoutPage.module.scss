@@ -1,60 +1,78 @@
 @import "styles/mixins";
 .checkout-wrapper {
-    @include container;
-    flex-direction: column;
-    padding-top: 32px;
-    width: 100%;
-    min-width: 1240px;
+  @include container;
+  flex-direction: column;
+  padding-top: 32px;
+  width: 100%;
+  min-width: 1240px;
 }
 
 .checkout {
+  display: flex;
+  width: 100%;
+  padding-top: 48px;
+  &__fields {
     display: flex;
-    width: 100%;
-    padding-top: 48px;
-    &__fields {
-        display: flex;
-        flex-direction: column;
-        min-width: 66%;
-        padding-right: 64px;
-    }
-    &__address {
-        margin-top: 16px;
-    }
+    flex-direction: column;
+    min-width: 66%;
+    padding-right: 64px;
+  }
+  &__address {
+    margin-top: 16px;
+  }
 }
 
 .payment-card {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: flex-start;
+  background-color: $color-breaker-bay;
+  width: 50%;
+  height: 260px;
+  border-radius: 32px;
+  padding: 32px;
+  &__input-card-number {
+    width: 70%;
+    height: 40px;
+    padding: 0px 10px;
+    &_invalid {
+      border: 3px solid $color-red;
+    }
+    &_invalid:focus-within {
+      border: 3px solid $color-red;
+    }
+  }
+  &__input-card-date {
+    width: 70%;
+    height: 40px;
+    padding: 0px 10px;
+    &_invalid {
+      border: 3px solid $color-red;
+    }
+    &_invalid:focus-within {
+      border: 3px solid $color-red;
+    }
+  }
+  &__input-card-cvc {
+    width: 60%;
+    height: 40px;
+    padding: 0px 10px;
+    &_invalid {
+      border: 3px solid $color-red;
+    }
+    &_invalid:focus-within {
+      border: 3px solid $color-red;
+    }
+  }
+  &__inner-wrapper {
+    padding-top: 32px;
     display: flex;
-    flex-direction: column;
-    align-self: center;
+    align-items: center;
     justify-content: flex-start;
-    background-color: $color-breaker-bay;
-    width: 50%;
-    height: 260px;
-    border-radius: 32px;
-    padding: 32px;
-    &__input-card-number {
-        width: 70%;
-        height: 40px;
-        padding: 0px 10px;
-    }
-    &__input-card-date {
-        width: 70%;
-        height: 40px;
-        padding: 0px 10px;
-    }
-    &__input-card-cvc {
-        width: 60%;
-        height: 40px;
-        padding: 0px 10px;
-    }
-    &__inner-wrapper {
-        padding-top: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
+  }
 }
 
 .pay-button {
-    margin-top: 36px;
+  margin-top: 36px;
 }

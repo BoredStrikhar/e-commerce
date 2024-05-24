@@ -28,6 +28,12 @@ export class UserStore {
     return this._user;
   }
 
+  logOut() {
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('access_token');
+    this._user = { name: '', email: '', password: '', avatar: '' };
+  }
+
   get error(): string {
     return this._error;
   }

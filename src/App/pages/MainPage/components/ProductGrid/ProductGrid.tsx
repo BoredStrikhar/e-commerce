@@ -17,10 +17,6 @@ const ProductGrid = () => {
 
   const productsPerPage = 9;
 
-  useEffect(() => {
-    productsStore.getFullListLength();
-  }, []);
-
   const fetchMoreData = useCallback(() => {
     productsStore.fetchMoreProducts();
     setSearchParams((prev) => {
@@ -41,6 +37,7 @@ const ProductGrid = () => {
     productsStore.getProductsList({
       limit: (productsStore.currentPage + 1) * productsPerPage,
     });
+    productsStore.getFullListLength();
   }, [productsStore, productsStore.search, productsStore.currentCategory.key]);
 
   if (productsStore.meta === Meta.loading) {

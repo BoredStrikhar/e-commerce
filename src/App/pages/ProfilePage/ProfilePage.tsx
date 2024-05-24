@@ -18,8 +18,7 @@ const ProfilePage = () => {
   }, [navigate]);
 
   const handleLogOutClick = () => {
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('access_token');
+    rootStore.user.logOut();
     navigate('/signin');
   };
 
@@ -40,24 +39,32 @@ const ProfilePage = () => {
         <Button onClick={handleLogOutClick}>Log Out</Button>
       </div>
       <div className={s['orders']}>
-        <Text view="title">Orders</Text>
+        <div className={s['orders__header']}>
+          <Text view="title">Orders</Text>
+          <Text className={s['orders__counter']} view="p-20" color="accent" weight="bold">
+            {orders ? orders.length : 0}
+          </Text>
+        </div>
         {orders ? (
           orders.map((order) => (
-            <div key={order.address} className={s['orders__order']}>
-              <Text view="p-20" color="white">
+            <div key={order.address} className={s['order']}>
+              <Text view="p-20" color="white" className={s['order__address']}>
                 Address: {order.address}
               </Text>
-              <Text view="p-20" color="white">
+              <Text view="p-20" color="white" className={s['order__price']}>
+                Total Price: {order.total}$
+              </Text>
+              <Text view="p-20" color="white" className={s['order__products']}>
                 Products:
               </Text>
               {order.products.map((product) => (
-                <Text view="p-20" key={product.id} color="white">
-                  {product.title}
-                </Text>
+                <div key={product.id} className={s['order__product-wrapper']}>
+                  {/* <img src={product.images[0]} className={s['order__image']}></img> */}
+                  <Text view="p-20" color="white" className={s['order__product-title']}>
+                    {product.title}
+                  </Text>
+                </div>
               ))}
-              <Text view="p-20" color="white">
-                Total Price: {order.total}
-              </Text>
             </div>
           ))
         ) : (

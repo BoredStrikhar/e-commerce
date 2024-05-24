@@ -39,6 +39,11 @@
       border-bottom: 3px solid $color-text-accent;
     }
   }
+  &__page-text {
+    &:hover {
+      color: $color-breaker-bay;
+    }
+  }
   &__icons {
     @include container;
     height: 64px;

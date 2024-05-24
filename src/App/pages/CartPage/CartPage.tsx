@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import img from 'assets/noimage.png';
 import Button from 'components/Button';
 import Text from 'components/Text';
 import rootStore from 'store/RootStore/instance';
@@ -28,8 +29,8 @@ const CartPage = () => {
   };
 
   const handleCheckoutClick = () => {
-    navigate('/checkout')
-  }
+    navigate('/checkout');
+  };
 
   if (rootStore.cart.meta === Meta.loading) {
     return <LoaderPage />;
@@ -58,7 +59,13 @@ const CartPage = () => {
       </Text>
       {rootStore.cart.products.map((item) => (
         <div key={item.id} className={s['product']}>
-          <img src={item.images[0]} className={s['product__image']} />
+          <img
+            src={item.images[0]}
+            className={s['product__image']}
+            onError={({ currentTarget }) => {
+              currentTarget.src = img;
+            }}
+          />
           <Text view="p-20" className={s['product__title']}>
             {item.title}
           </Text>
@@ -87,7 +94,9 @@ const CartPage = () => {
         <Text view="p-20" weight="bold">
           {'Total = ' + rootStore.cart.cartTotal + '$'}
         </Text>
-        <Button onClick={handleCheckoutClick} className={s['total-block__button']}>Proceed to checkout</Button>
+        <Button onClick={handleCheckoutClick} className={s['total-block__button']}>
+          Proceed to checkout
+        </Button>
       </div>
     </div>
   );

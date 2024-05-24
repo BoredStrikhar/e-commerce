@@ -2,6 +2,7 @@
 .sign-up-wrapper {
     @include container;
     flex-direction: column;
+    padding-bottom: 80px;
 }
 
 .sign-up-card {

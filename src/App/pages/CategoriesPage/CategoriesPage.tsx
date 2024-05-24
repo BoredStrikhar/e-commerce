@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import img from 'assets/noimage.png';
 import Text from 'components/Text';
 import CategoriesStore from 'store/CategoriesStore';
 import { Meta } from 'utils/meta';
@@ -12,10 +13,6 @@ const CategoriesPage = () => {
   const categoriesStore = useLocalStore(() => new CategoriesStore());
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    categoriesStore.getCategoriesList();
-  }, []);
 
   const categories = categoriesStore.list;
 
@@ -38,7 +35,13 @@ const CategoriesPage = () => {
       <div className={s['categories-grid']}>
         {categories.map((item) => (
           <div className={s['categories-grid__category']} key={item.id} onClick={() => handleCategoryClick(item.id)}>
-            <img src={item.image} className={s['categories-grid__image']} />
+            <img
+              src={item.image}
+              className={s['categories-grid__image']}
+              onError={({ currentTarget }) => {
+                currentTarget.src = img;
+              }}
+            />
             <Text view="p-20" className={s['categories-grid__title']}>
               {item.name}
             </Text>

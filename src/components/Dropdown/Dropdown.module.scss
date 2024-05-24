@@ -1,19 +1,33 @@
 @import "styles/mixins";
 .dropdown {
-    width: 300px;
-    position: relative;
-    &__options {
-        margin-top: 8px;
-        width: 100%;
-        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
-        background: $color-white;
-        position: absolute;
-        top: 20;
-        max-height: 580px;
-        overflow-y: auto;
+  width: 300px;
+  position: relative;
+  &__options {
+    margin-top: 8px;
+    width: 100%;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    background: $color-white;
+    position: absolute;
+    top: 20;
+    max-height: 580px;
+    overflow-y: auto;
+  }
+  &__option-text {
+    padding: 14px 12px;
+    height: 48px;
+  }
+  &__icons-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__cross-icon-wrapper {
+    padding-top: 6px;
+    &:hover {
+      cursor: pointer;
     }
-    &__option-text {
-        padding: 14px 12px;
-        height: 48px;
-    }
+  }
+  &__input_removed-caret {
+    caret-color: transparent;
+  }
 }

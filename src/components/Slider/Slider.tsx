@@ -1,9 +1,11 @@
 import cn from 'classnames';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import img from 'assets/noimage.png';
 import SliderNavButtons from 'components/Slider/components/SliderNavButtons';
 import s from './Slider.module.scss';
 import 'swiper/scss';
+
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
@@ -19,7 +21,13 @@ const Slider: React.FC<SliderProps> = ({ images, className }) => {
       {images.map((image) => {
         return (
           <SwiperSlide key={image}>
-            <img className={s['slider__product-image']} src={image} />
+            <img
+              className={s['slider__product-image']}
+              src={image}
+              onError={({ currentTarget }) => {
+                currentTarget.src = img;
+              }}
+            />
           </SwiperSlide>
         );
       })}

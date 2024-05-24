@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -49,7 +50,14 @@ const CheckoutPage = () => {
 
     setCurrentCardDate(parsedValue);
 
-    if (parsedValue.length === cardDateValidLength) {
+    const currentYear = new Date().getFullYear();
+
+    if (
+      parsedValue.length === cardDateValidLength &&
+      Number(parsedValue[0] + parsedValue[1]) > 0 &&
+      Number(parsedValue[0] + parsedValue[1]) <= 12 &&
+      Number(parsedValue[3] + parsedValue[4]) >= currentYear % 100
+    ) {
       setIsCardDateValid(true);
       return;
     }
@@ -112,7 +120,9 @@ const CheckoutPage = () => {
           <Input
             value={currentCardNumber}
             onChange={handleCardNumberChange}
-            className={s['payment-card__input-card-number']}
+            className={cn(s['payment-card__input-card-number'], {
+              [s['payment-card__input-card-number_invalid']]: currentCardNumber && !isCardNumberValid,
+            })}
             placeholder="XXXX XXXX XXXX XXXX"
           />
           <div className={s['payment-card__inner-wrapper']}>
@@ -123,7 +133,9 @@ const CheckoutPage = () => {
               <Input
                 value={currentCardDate}
                 onChange={handleCardDateChange}
-                className={s['payment-card__input-card-date']}
+                className={cn(s['payment-card__input-card-date'], {
+                  [s['payment-card__input-card-date_invalid']]: currentCardDate && !isCardDateValid,
+                })}
                 placeholder="XX/XX"
               />
             </div>
@@ -134,7 +146,9 @@ const CheckoutPage = () => {
               <Input
                 value={currentCardCVC}
                 onChange={handleCardCVCChange}
-                className={s['payment-card__input-card-cvc']}
+                className={cn(s['payment-card__input-card-cvc'], {
+                  [s['payment-card__input-card-cvc_invalid']]: currentCardCVC && !isCardCVCValid,
+                })}
                 placeholder="XXX"
               />
             </div>

@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Button from 'components/Button';
 import Input from 'components/Input';
+import CrossIcon from 'components/icons/CrossIcon';
 import { useProductsStore } from 'store/ProductsStore/hooks';
 import s from './Search.module.scss';
 
@@ -24,9 +25,29 @@ const Search = () => {
     setSearchParams({ search: currentValue, categoryId: productsStore.currentCategory.key.toString() });
   };
 
+  const resetSearch = () => {
+    setCurrentValue('');
+    setSearchParams({ search: '', categoryId: productsStore.currentCategory.key.toString() });
+  };
+
   return (
     <form className={s['search']} onSubmit={handleButtonClick}>
-      <Input placeholder="Search product" value={currentValue} onChange={handleChange}></Input>
+      <Input
+        placeholder="Search product"
+        value={currentValue}
+        onChange={handleChange}
+        afterSlot={
+          currentValue && (
+            <CrossIcon
+              color="primary"
+              width="32px"
+              height="32px"
+              className={s['search__cross-icon']}
+              onClick={resetSearch}
+            />
+          )
+        }
+      ></Input>
       <Button className={s['search__button']} type="submit">
         Find now
       </Button>

@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import Input from 'components/Input';
 import Text from 'components/Text';
 import ArrowDownIcon from 'components/icons/ArrowDownIcon';
+import CrossIcon from 'components/icons/CrossIcon';
+import { useProductsStore } from 'store/ProductsStore/hooks';
 import s from './Dropdown.module.scss';
 
 export type Option = {
@@ -32,6 +34,14 @@ const Dropdown: React.FC<DropdownProps> = ({ className, options, value, onChange
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [currentInput, setCurrentInput] = useState('');
   const [filteredOptions, setFilteredOptions] = useState(options);
+  const productsStore = useProductsStore();
+
+  useEffect(() => {
+    if (productsStore.currentCategory.key === 0) {
+      onChange({ key: 0, value: '' });
+      setCurrentInput(productsStore.currentCategory.value);
+    }
+  }, [productsStore.currentCategory.key]);
 
   const handleInputChange = (inputValue: string) => {
     if (value.value) {
@@ -63,6 +73,11 @@ const Dropdown: React.FC<DropdownProps> = ({ className, options, value, onChange
     }
   };
 
+  const resetFilter = () => {
+    onChange({ key: 0, value: '' });
+    setCurrentInput('');
+  };
+
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
@@ -81,7 +96,17 @@ const Dropdown: React.FC<DropdownProps> = ({ className, options, value, onChange
           onChange={handleInputChange}
           placeholder={'Categories'}
           disabled={disabled}
-          afterSlot={<ArrowDownIcon color="secondary"></ArrowDownIcon>}
+          className={classNames({[s['dropdown__input_removed-caret']]: productsStore.currentCategory.key})}
+          afterSlot={
+            <div className={s['dropdown__icons-wrapper']}>
+              <div className={s['dropdown__cross-icon-wrapper']}>
+                {(currentInput || value.value) && (
+                  <CrossIcon color="primary" width="32px" height="32px" onClick={resetFilter} />
+                )}
+              </div>
+              <ArrowDownIcon color="secondary"></ArrowDownIcon>
+            </div>
+          }
         />
       </form>
       {isOpen && !disabled && (
